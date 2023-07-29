@@ -1,3 +1,4 @@
+import { MainPageAsync } from "pages/mainPage";
 import { RouteProps } from "react-router-dom";
 
 export enum AppRoutes{
@@ -19,7 +20,7 @@ export const RoutePath:Record<AppRoutes, string> = {
 export const RouterConfig:Record<AppRoutes, RouteProps> = {
     [AppRoutes.MAIN]:{
         path:RoutePath.main,
-        element:<>sosat</>
+        element:<MainPageAsync/>
     },
     [AppRoutes.MMR_BOOST]:{
         path:RoutePath.mmr,

@@ -25,14 +25,30 @@ export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
             // Creates `style` nodes from JS strings
           options.isDev?"style-loader":MiniCssExtractPlugin.loader,
           // Translates CSS into CommonJS
-          "css-loader",
-    
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1,
+              modules: true,
+            },
+          },
           // Compiles Sass to CSS
           "sass-loader",
         ],
-
+    }
+    const fontloader = {
+      test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/'
+            }
+          }
+        ]
     }
     return [
-        typescriptLoader, styleLoader
+        typescriptLoader, styleLoader, fontloader
     ];
 }

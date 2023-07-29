@@ -3,7 +3,21 @@
 @import "./themes/dark.scss";
 @import "./themes/light.scss";
 
+@font-face{
+    font-family: "Logo";
+    src: local("Raleway-ExtraBoldItalic"), url("../../public/fonts/Raleway-ExtraBoldItalic.ttf") format("ttf");
+}
 
+body{
+    margin: 0;
+    padding: 0;
+}
+p{
+    text-decoration: none;
+}
+a{
+    text-decoration: none;
+}
 *{
     padding: 0;
 }
