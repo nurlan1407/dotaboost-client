@@ -11,6 +11,7 @@
 body{
     margin: 0;
     padding: 0;
+    color: var(--primary-color)
 }
 p{
     text-decoration: none;
@@ -22,8 +23,5 @@ a{
     padding: 0;
 }
 .app{
-    font: var(--font-m);
-    color: var(--primary-color);
-    background: var(--bg-color);
     min-height: 100vh;
 }

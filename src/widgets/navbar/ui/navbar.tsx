@@ -22,13 +22,13 @@ const Navbar: FC = ({  }) => {
               <Link href=''>Home</Link>
             </li>
             <li className={cls.dropdownToggle}>
-              <Link href='' >Buy Boost &nbsp;<i className='fa fa-sort-desc'></i></Link>
+                <Link href='' >Buy Boost &nbsp;<i className='fa fa-sort-desc'></i></Link>
                 <ul className={`${cls.dropdownMenu}`}>
-                <li className={cls.dropdownItem}><Link href="#">MMR BOOST</Link></li>
-                <li className={cls.dropdownItem}><Link href="#">Low Priority</Link></li>
-                <li className={cls.dropdownItem}><Link href="#">Calibration</Link></li>
-                <li className={cls.dropdownItem}><Link href="#">Beaviour Score</Link></li>
-              </ul>       
+                  <li className={cls.dropdownItem}><Link href="#">MMR BOOST</Link></li>
+                  <li className={cls.dropdownItem}><Link href="#">Low Priority</Link></li>
+                  <li className={cls.dropdownItem}><Link href="#">Calibration</Link></li>
+                  <li className={cls.dropdownItem}><Link href="#">Beaviour Score</Link></li>
+                </ul>       
             </li>
             <li>
               <Link href=''>Boosters</Link>

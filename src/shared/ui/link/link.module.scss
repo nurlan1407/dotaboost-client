@@ -2,7 +2,7 @@
     display: block;
     padding: 0 3px;
     text-decoration: none;
-    color:black
+    color:var(--primary-color)
 }
 .link:hover{
     text-decoration: underline;
