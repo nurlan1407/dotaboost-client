@@ -10,7 +10,6 @@ ul{
 }
 
 .navbar{
-    width: 50%;
     height: var(--navbar-height);
     display: flex;
     justify-content: space-between;
@@ -40,6 +39,7 @@ ul{
     position: absolute;
     width: 100%;
     background-color: #fff;
+    z-index: 2;
 }
 
 .dropdownItem{

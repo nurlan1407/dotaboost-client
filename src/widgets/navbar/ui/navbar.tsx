@@ -15,7 +15,8 @@ const Navbar: FC = ({  }) => {
   useOnHoverOutside(dropdownRef,closeHoverMenu)
   return (
     <div className={cls.navbarContainer}>
-      <nav className={cls.navbar}>
+      <div className='wrapper'>
+          <nav className={cls.navbar}>
         <Logo/>
           <ul className={cls.navbarOptions}>
             <li>
@@ -41,6 +42,8 @@ const Navbar: FC = ({  }) => {
             </li>
           </ul>
       </nav>
+      </div>
+      
     </div>
   )
 }

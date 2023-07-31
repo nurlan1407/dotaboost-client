@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import './app/styles/index.scss'
 //font
 import './public/fonts/Raleway-ExtraBoldItalic.ttf'
+import './public/fonts/Raleway-Regular.ttf'
 
 const root = document.getElementById('root')
 ReactDom.render(

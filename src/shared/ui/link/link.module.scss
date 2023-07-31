@@ -2,7 +2,8 @@
     display: block;
     padding: 0 3px;
     text-decoration: none;
-    color:var(--primary-color)
+    color:var(--primary-color);
+    font-size: var(--font-size-m);
 }
 .link:hover{
     text-decoration: underline;

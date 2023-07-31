@@ -5,14 +5,23 @@
 
 @font-face{
     font-family: "Logo";
-    src: local("Raleway-ExtraBoldItalic"), url("../../public/fonts/Raleway-ExtraBoldItalic.ttf") format("ttf");
+    src: local("Raleway-ExtraBoldItalic"), url("../../public/fonts/Raleway-ExtraBoldItalic.ttf") format("woff");
 }
+@font-face {
+    font-family: "Railway";
+    src: local("Railwat-Regular"), url("../../public/fonts/Raleway-Regular.ttf") format("woff");
+}
+
 
 body{
     margin: 0;
     padding: 0;
     color: var(--primary-color)
 }
+*{
+    font-family:sans-serif ;
+}
+
 p{
     text-decoration: none;
 }
@@ -22,6 +31,8 @@ a{
 *{
     padding: 0;
 }
-.app{
-    min-height: 100vh;
+
+
+h1,h2,h3,h4,h5,h6,p{
+    line-height: 0;
 }
