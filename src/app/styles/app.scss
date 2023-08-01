@@ -1,7 +1,7 @@
-.app{
+:global(.app){
     min-height: 100vh;
 }
-.wrapper{
-    max-width: 1300px;
+:global(.wrapper){
+    max-width: 1150px;
     margin: 0 auto;
 }
