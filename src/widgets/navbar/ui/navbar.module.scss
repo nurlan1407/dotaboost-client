@@ -3,7 +3,8 @@ ul{
 }
 
 .navbarContainer{
-    position: relative;
+    position: fixed;
+    z-index: 80000;
     width: 100%;
     height: fit-content;
     background-color: var(--secondary-color);

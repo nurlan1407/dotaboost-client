@@ -1,0 +1,49 @@
+.rank {
+    max-width: 500px;
+    display: flex;
+    flex: 0 0 50%;
+    flex-direction: column;
+    align-items: center;
+    color: var(--secondary-color);
+    padding: 50px 25px;
+}
+
+.label {
+    font-size: var(--font-size-m);
+    text-align: center;
+}
+
+.mmrBlock {
+    max-width: 200px;
+    padding: 20px 30px;
+    border-radius: 50px;
+    border: 2px solid var(--secondary-color);
+    font-weight: 700;
+    font-size: var(--font-size-l);
+    text-align: center;
+    outline: none;
+    transition: border ease-in 0.3s;
+    &:active{
+        border: 2px solid #71c4ff
+    }
+    &:focus{
+        border: 2px solid #71c4ff;
+    }
+}
+
+input[type="number"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+
+.rankIcon {
+    width: 160px;
+    transition: all ease 0.2s;
+}

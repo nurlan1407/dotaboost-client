@@ -1,0 +1,149 @@
+$MAX_MMR:8000;
+$DIVISION_AMOUNT:1000;
+$TRACK_WIDTH:900px;
+
+
+.mmrContainer{
+  width: 100%;
+  height: fit-content;
+  color: var(--secondary-color);
+  padding-top: 30px;
+  padding-bottom: 200px;
+}
+
+.header{
+  text-align: center;
+  font-size: var(--font-size-l);
+}
+
+@mixin rangeThumb {
+  width: 35px;
+  height: 35px;
+  // margin-top: 8px;
+  border-radius: 50%;
+  background: #2CA8FF;
+  cursor: pointer;
+  border: 0 !important;
+  pointer-events: auto;
+  z-index: 100;
+
+  &:active{
+    border-color: #71c4ff;
+    border-width: 5px;
+  }
+}
+
+
+
+
+@mixin rangeTrack {
+  width: 100%;
+  height: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.range {
+  position: relative;
+  width: $TRACK_WIDTH;
+  height: 15px;
+  margin: 0 auto;
+}
+
+.range input {
+  width: 100%;
+  pointer-events: none;
+  position: absolute;
+  // top: 13px;
+  height: 0;
+  z-index: 1;
+  -webkit-appearance: none;
+
+  // Thumb
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none; // needed again for Chrome & Safari
+    @include rangeThumb;
+  }
+
+  &::-moz-range-thumb {
+    @include rangeThumb;
+  }
+
+  &::-ms-thumb {
+    @include rangeThumb;
+  }
+
+  // Track
+  &::-webkit-slider-runnable-track {
+    @include rangeTrack;
+  }
+
+  &::-moz-range-track {
+    @include rangeTrack;
+  }
+
+  &::-ms-track {
+    @include rangeTrack;
+  }
+
+  &:focus {
+    // override outline/background on focus
+    background: none;
+    outline: none;
+  }
+
+  &::-ms-track {
+    // A little somethin' somethin' for IE
+    width: 100%;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    color: transparent;
+  }
+}
+
+
+.rangeLabels2{
+  width: 900px;
+  position: relative;
+  padding-top: 10px;
+  margin: 0 auto;
+}
+.identifier{
+  position: absolute;
+  display: inline-block;
+  color: #273042;
+  font-size: var(--font-size-m);
+  cursor: pointer;
+}
+
+.divFill {
+  position: absolute;
+  height: 15px;
+  top: 7px;
+  z-index: -2;
+  background-color: #2CA8FF;
+  background-size: 100% 100%;
+  border-radius: 10px;
+}
+
+/* track fill */
+.divLowerFill {
+  position: absolute;
+  height: 15px;
+  width: 100%;
+  top: 7px;
+  background-color: #808080;
+  pointer-events: none;
+  z-index: -50;
+  border-radius: 10px;
+}
+
+
+
+
+
+.ranksContainer{
+    display: flex;
+    margin: 0 auto;
+}
