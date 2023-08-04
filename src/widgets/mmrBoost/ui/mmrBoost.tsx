@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Rank } from 'widgets/rank'
+import Button from 'shared/ui/button/Button'
 import cls from './mrrBoost.module.scss'
 //assets
 import rank1 from 'public/assets/rank_1.png'
@@ -11,38 +12,53 @@ import { Rank as RankObject, ranks } from 'shared/config/mmrBoostConfig/mmrBoost
 const MAX_MMR = 8000
 const DIVISION = 1000 //как делится в полоске
 const DEFAULT_VARIANCE = 80
+const MMR_PER_DAY = 250
+const PRICE_FOR_MMR = 7
 
-function kak(MMR:number, setRankImage:(rankObj:RankObject)=>void){
-    const rank = ranks.filter((item:RankObject)=>{
-        if(MMR>=item.min && MMR<= item.max){
+function kak(MMR: number, setRankImage: (rankObj: RankObject) => void) {
+    const rank = ranks.filter((item: RankObject) => {
+        if (MMR >= item.min && MMR <= item.max) {
             setRankImage(item)
             return
         }
     })
-    
 }
+
+
 
 export const MmrBoost: FC = ({ }) => {
     const [currentMMR, setCurrentMMR] = React.useState(1000)
     const [desiredMMR, setDesiredMMR] = React.useState(5000)
+    const [estimatedTime, setEstimatedTime] = React.useState(Math.ceil((desiredMMR - currentMMR)/MMR_PER_DAY))
+    const [estimatedPrice, setEstimatedPrice] = React.useState((((desiredMMR - currentMMR)/MMR_PER_DAY) * PRICE_FOR_MMR).toFixed())
 
-    const [currentRankImage, setRankImage] = React.useState<RankObject|null>(null)
-    const [desiredRankImage, setDesiredRankImage] = React.useState<RankObject|null>(null)
+    const [currentRankImage, setRankImage] = React.useState<RankObject | null>(null)
+    const [desiredRankImage, setDesiredRankImage] = React.useState<RankObject | null>(null)
 
+    function estimateTime(){
+        var res = Math.ceil((desiredMMR - currentMMR)/MMR_PER_DAY)
+        setEstimatedTime(res)
+    }
+    function estimatePrice(){
+        var res =  ((desiredMMR - currentMMR)/MMR_PER_DAY * PRICE_FOR_MMR).toFixed(2)
+        setEstimatedPrice(res)
+    }
     React.useEffect(() => {
         fillSlider(currentMMR, desiredMMR)
         kak(currentMMR, setRankImage)
         kak(desiredMMR, setDesiredRankImage)
+        estimatePrice()
+        estimateTime()
     }, [currentMMR, desiredMMR])
 
 
     const add = (term: string) => {
-        if(term == ''){
+        if (term == '') {
             setCurrentMMR(0)
             return
         }
         const value = parseInt(term)
-       
+
         if (value <= desiredMMR) {
             setCurrentMMR(value)
         } else {
@@ -51,12 +67,12 @@ export const MmrBoost: FC = ({ }) => {
 
     }
     const add1 = (term: string) => {
-        if (term ==''){
+        if (term == '') {
             setDesiredMMR(1500)
             return
         }
         const value = parseInt(term)
-        if(value>MAX_MMR){
+        if (value > MAX_MMR) {
             setDesiredMMR(MAX_MMR)
             return
         }
@@ -83,20 +99,19 @@ export const MmrBoost: FC = ({ }) => {
     }
 
     function onLiClicked(clickedValue: number) {
-        
         if (Math.abs(currentMMR - clickedValue) > Math.abs(desiredMMR - clickedValue)) {
             add1(clickedValue.toString())
         } else {
             add(clickedValue.toString())
         }
     }
-    
+
     return (
         <div className={cls.mmrContainer}>
             <h2 className={cls.header}>MMR Boost</h2>
             <div className={cls.ranksContainer}>
-                <Rank label='Current MMR' value={currentMMR} rankIcon={currentRankImage?.img} changeValue={add}/>
-                <Rank label='Desired MMR' value={desiredMMR} rankIcon={desiredRankImage?.img} changeValue={add1}/>
+                <Rank label='Current MMR' value={currentMMR} rankIcon={currentRankImage?.img} changeValue={add} />
+                <Rank label='Desired MMR' value={desiredMMR} rankIcon={desiredRankImage?.img} changeValue={add1} />
             </div>
             <div className={cls.range}>
                 <div id="fillTracker" className={cls.divFill}></div>
@@ -115,7 +130,17 @@ export const MmrBoost: FC = ({ }) => {
                 <span className={cls.identifier} style={{ left: `${DIVISION * 100 / MAX_MMR * 7}%`, transform: `translateX(-50%)` }} onClick={() => onLiClicked(7000)}>7000</span>
                 <span className={cls.identifier} style={{ left: `${DIVISION * 100 / MAX_MMR * 8}%`, transform: `translateX(-50%)` }} onClick={() => onLiClicked(8000)}>8000</span>
             </div>
-            
+            <div className={cls.estimatedPriceBlock}>
+                <p className={cls.estimatedTime}>
+                    Estimated time for completion <strong>  {estimatedTime} days </strong>
+                </p>
+                <h3 className={cls.estimatedPrice}>
+                    ${estimatedPrice}
+                </h3>
+                <Button className={cls.buyBtn} onClick={()=>{}}>
+                    Buy
+                </Button>
+            </div>
         </div>
     )
 }

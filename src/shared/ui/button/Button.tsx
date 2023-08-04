@@ -3,7 +3,8 @@ import cls from './button.module.scss'
 import { classNames } from 'shared/lib/classNames/classNames'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>{
-  className?:string
+  className?:string,
+  onClick:()=>void
 }
 
 const Button: FC<ButtonProps> = (props) => {

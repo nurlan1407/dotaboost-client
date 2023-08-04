@@ -30,7 +30,7 @@ export const Rank: FC<RankProps> = ({ label, value, rankIcon,changeValue }) => {
             <p className={cls.label}>{label}</p>
             <input className={cls.mmrBlock} id='inp' type='number' min={0} max={8000} 
                 value={value} 
-                onChange={(e)=>{changeValue(e.target.value)}}  ref={inputRef}
+                onChange={(e)=>{changeValue(e.target.value[0]=='0'?e.target.value[1]:e.target.value )}}  ref={inputRef}
              />
             <img src={rankIcon} className={cls.rankIcon}></img>
             <h3></h3>
