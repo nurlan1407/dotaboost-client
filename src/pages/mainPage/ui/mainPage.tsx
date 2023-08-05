@@ -16,8 +16,8 @@ const MainPage: FC = ({ }) => {
       <HeroSection />
       <div className='wrapper'>
         <div className=''>
-          {/* <MmrBoost/> */}
-          <LowPriority />
+          <MmrBoost/>
+          {/* <LowPriority /> */}
         </div>
       </div>
     </div>

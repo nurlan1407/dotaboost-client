@@ -51,17 +51,20 @@
 .inputRange {
     width: 80%;
     height: 35px;
-    z-index: 1;
+    // z-index: 1;
     -webkit-appearance: none;
-    background-color: #9a905d;
+    // background-color: #9a905d;
     border-radius: 16px;    
     cursor: pointer;
 
     &::-webkit-slider-runnable-track {
         height: 35px;
-        -webkit-appearance: none;
-        color: #13bba4;
+        // accent-color: red;
+        // -webkit-appearance: none;
+        background: transparent;
         margin-top: -1px;
+        accent-color: red;
+
       }
 
     &::-webkit-slider-thumb {
