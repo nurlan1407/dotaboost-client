@@ -4,7 +4,7 @@ ul{
 
 .navbarContainer{
     position: fixed;
-    z-index: 80000;
+    z-index: 200;
     width: 100%;
     height: fit-content;
     background-color: var(--secondary-color);
@@ -32,6 +32,7 @@ ul{
     cursor: pointer;
     position: relative;
     display: inline-block;
+    padding: 0;
 }
 
   
@@ -64,4 +65,15 @@ ul{
 
 .dropdownToggle:hover .dropdownMenu{
     display: block;
+}
+
+
+.navbarOption{
+    padding: 10px 20px;
+    background-color: transparent;
+}
+.navbarOption:hover{
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: background-color 0.2s ease-in-out;
 }
