@@ -1,0 +1,50 @@
+.paymentPage{
+  position: relative;
+  width: 100%;
+  height: fit-content;
+}
+
+
+
+.container{
+  padding-top: var(--navbar-height);
+}
+
+.header{
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: var(--font-size-xl);
+  line-height: var(--font-line-xl);
+  color: black;
+  text-align: center;
+}
+
+.gameAccountCredentials{
+}
+
+.inputContainer{
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input{
+  margin: 0;
+  padding: 7px 8px;
+  height: 25px;
+  font-size: 14px;
+  border: 1px solid;
+  border-radius: 10px;
+  border-color: gray;
+}
+
+.input::placeholder {
+  color: gray;
+}
+.input:focus{
+  outline: none !important;
+  border-color: #2CA8FF;
+  box-shadow: 0 0 3px 0 #1183d6;
+}

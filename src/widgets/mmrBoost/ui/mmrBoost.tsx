@@ -7,6 +7,8 @@ import rank1 from 'public/assets/rank_1.png'
 import rank2 from 'public/assets/rank_2.png'
 
 import { Rank as RankObject, ranks } from 'shared/config/mmrBoostConfig/mmrBoostConfig'
+import {Link} from "react-router-dom";
+import {AppRoutes, RoutePath} from "shared/config/routerConfig/routerConfig";
 
 
 const MAX_MMR = 8000
@@ -120,8 +122,8 @@ export const MmrBoost: FC = ({ }) => {
                 <input maxLength={4} type="range" id="pidor" className={`lox ${cls.secondRange}`} min="0" max={MAX_MMR} step="20" value={desiredMMR} onChange={(e) => add1(e.target.value)} />
             </div>
             <div className={cls.rangeLabels2}>
-                <span className={cls.identifier} style={{ left: `${DIVISION * 100 / MAX_MMR * 0}%`, transform: `translateX(-20%)` }} onClick={() => onLiClicked(0)}>0</span>
-                <span className={cls.identifier} style={{ left: `${DIVISION * 100 / MAX_MMR * 1}%`, transform: `translateX(-30%)` }} onClick={() => onLiClicked(1000)}>1000</span>
+                <span className={cls.identifier} style={{ left: `${0}%`, transform: `translateX(-20%)` }} onClick={() => onLiClicked(0)}>0</span>
+                <span className={cls.identifier} style={{ left: `${(DIVISION * 100 / MAX_MMR)}%`, transform: `translateX(-30%)` }} onClick={() => onLiClicked(1000)}>1000</span>
                 <span className={cls.identifier} style={{ left: `${DIVISION * 100 / MAX_MMR * 2}%`, transform: `translateX(-25%)` }} onClick={() => onLiClicked(2000)}>2000</span>
                 <span className={cls.identifier} style={{ left: `${DIVISION * 100 / MAX_MMR * 3}%`, transform: `translateX(-35%)` }} onClick={() => onLiClicked(3000)}>3000</span>
                 <span className={cls.identifier} style={{ left: `${DIVISION * 100 / MAX_MMR * 4}%`, transform: `translateX(-30%)` }} onClick={() => onLiClicked(4000)}>4000</span>
@@ -132,14 +134,12 @@ export const MmrBoost: FC = ({ }) => {
             </div>
             <div className={cls.estimatedPriceBlock}>
                 <p className={cls.estimatedTime}>
-                    Estimated time for completion <strong>  {estimatedTime} days </strong>
+                    Estimated time for completion: <strong className={cls.time}>  {estimatedTime} days </strong>
                 </p>
                 <h3 className={cls.estimatedPrice}>
                     ${estimatedPrice}
                 </h3>
-                <Button className={cls.buyBtn} onClick={()=>{}}>
-                    Buy
-                </Button>
+                    <Link to={RoutePath.payment}><Button className={cls.buyBtn} onClick={()=>{}}>Checkout</Button></Link>
             </div>
         </div>
     )

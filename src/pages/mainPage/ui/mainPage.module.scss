@@ -2,4 +2,24 @@
     position: relative;
     width: 100%;
     height: fit-content;
+    padding-top: 30px;
+}
+
+.servicesHeader{
+    color: black;
+    text-align: left;
+    font-size: var(--font-size-l);
+    line-height: var(--font-line-l);
+}
+.servicesContainer{
+    width: 100%;
+}
+.servicesList{
+    display: flex;
+    width: 1300px;
+    height: fit-content;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 20px 0;
+
 }

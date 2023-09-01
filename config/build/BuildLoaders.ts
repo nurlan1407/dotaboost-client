@@ -79,6 +79,10 @@ export function buildLoaders(options: BuildOptions): webpack.RuleSetRule[] {
       issuer: /\.[jt]sx?$/,
       use: ['@svgr/webpack'],
     }
+    // const urlLoader= {
+    //     test: /\.(png|jpg)$/,
+    //     loader: 'url-loader'
+    // }
     return [
         typescriptLoader, styleLoader, fileloader, fontloader, svgLoader
     ];

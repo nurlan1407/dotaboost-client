@@ -3,12 +3,13 @@ ul{
 }
 
 .navbarContainer{
-    position: fixed;
     z-index: 200;
     width: 100%;
     height: fit-content;
-    background-color: var(--secondary-color);
+    //background-color: var(--secondary-color);
 }
+
+
 
 .navbar{
     height: var(--navbar-height);
@@ -77,3 +78,4 @@ ul{
     background-color: rgba(255, 255, 255, 0.5);
     transition: background-color 0.2s ease-in-out;
 }
+

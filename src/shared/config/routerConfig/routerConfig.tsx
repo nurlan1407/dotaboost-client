@@ -1,16 +1,20 @@
 import { MainPageAsync } from "pages/mainPage";
 import { RouteProps } from "react-router-dom";
+import {PaymentPageAsync} from "pages/checkout/ui/paymentPage.Async";
+import {MmrBoostAsync} from "pages/mmrBoostPage/ui/mmrBoostPage.Async";
 
 export enum AppRoutes{
     MAIN="main",
     MMR_BOOST="mmr",
     LOW_PRIORITY="lowpriority",
     CALIBRATION="calibration",
-    BEHAVIOUR="behaviour"
+    BEHAVIOUR="behaviour",
+    PAYMENT="payment"
 };
 
 export const RoutePath:Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: '/',
+    [AppRoutes.PAYMENT]:"/payment",
     [AppRoutes.MMR_BOOST]: '/mmr',
     [AppRoutes.LOW_PRIORITY]: '/lowpriority',
     [AppRoutes.CALIBRATION]: "/calibration",
@@ -22,9 +26,13 @@ export const RouterConfig:Record<AppRoutes, RouteProps> = {
         path:RoutePath.main,
         element:<MainPageAsync/>
     },
+    [AppRoutes.PAYMENT]:{
+        path:RoutePath.payment,
+        element:<PaymentPageAsync/>
+    },
     [AppRoutes.MMR_BOOST]:{
         path:RoutePath.mmr,
-        element:<>lezhat</>
+        element:<MmrBoostAsync/>
     },
     [AppRoutes.CALIBRATION]:{
         path:RoutePath.calibration,
