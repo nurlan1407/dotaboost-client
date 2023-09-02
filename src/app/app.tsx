@@ -8,6 +8,7 @@ import {AuthModal} from 'features/authentification/AuthModal'
 import {useAppSelector} from "app/providers/store/store";
 import {showAuthModal} from "app/providers/store/reducers/htmlStates";
 import mainBg from 'public/assets/bg_mainPage.jpg'
+import {Footer} from "widgets/footer";
 const App = () => {
     // const [showModal, setShowModal] = React.useState(false);
     const showModal = useAppSelector(state => state.htmlStatesReducer.showModal)
@@ -36,6 +37,7 @@ const App = () => {
                     <AppRouter></AppRouter>
                 </div>
                 <hr className='divider'/>
+                <Footer/>
             </div>
         </div>
     )

@@ -2,6 +2,8 @@ import { MainPageAsync } from "pages/mainPage";
 import { RouteProps } from "react-router-dom";
 import {PaymentPageAsync} from "pages/checkout/ui/paymentPage.Async";
 import {MmrBoostAsync} from "pages/mmrBoostPage/ui/mmrBoostPage.Async";
+import {LowPriority} from "widgets/lowPriority";
+import {LowPriorityAsync} from "pages/lowPriorityPage";
 
 export enum AppRoutes{
     MAIN="main",
@@ -44,6 +46,6 @@ export const RouterConfig:Record<AppRoutes, RouteProps> = {
     },
     [AppRoutes.LOW_PRIORITY]:{
         path:RoutePath.lowpriority,
-        element:<></>
+        element:<LowPriorityAsync/>
     }
 };

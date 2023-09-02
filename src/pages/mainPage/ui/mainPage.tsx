@@ -20,9 +20,9 @@ const MainPage: FC = ({ }) => {
                 <h3 className={cls.servicesHeader}>Select a service</h3>
                 <div className={cls.servicesList}>
                     <Card img={mmrBoostCardBg} title={"MMR BOOST"} link={RoutePath.mmr}></Card>
-                    <Card img={lowPriorityCardBg} title={"MMR BOOST"} link={RoutePath.mmr}></Card>
-                    <Card img={calibrationCardBg} title={"MMR BOOST"} link={RoutePath.mmr}></Card>
-                    <Card img={behaviourScoreCardBg} title={"MMR BOOST"} link={RoutePath.mmr}></Card>
+                    <Card img={lowPriorityCardBg} title={"Low Priority"} link={RoutePath.lowpriority}></Card>
+                    <Card img={calibrationCardBg} title={"Calibration"} link={RoutePath.calibration}></Card>
+                    <Card img={behaviourScoreCardBg} title={"overall score"} link={RoutePath.behaviour}></Card>
                 </div>
             </div>
         </div>

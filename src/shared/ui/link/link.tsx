@@ -10,7 +10,7 @@ interface LinkProps extends React.HTMLAttributes<HTMLAnchorElement> {
 const Link: FC<LinkProps> = (props) => {
     const {href, children} = props
     return(
-        <a href={href} className={cls.link}>
+        <a href={href} className={`${cls.link} ${props.className}`}>
             {children}
         </a>
     )

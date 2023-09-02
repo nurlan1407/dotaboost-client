@@ -21,10 +21,6 @@ export const Rank: FC<RankProps> = ({ label, value, rankIcon,changeValue }) => {
     },[])
     
 
-    
-   
-
-
     return (
         <div className={`${cls.rank}`}>
             <p className={cls.label}>{label}</p>

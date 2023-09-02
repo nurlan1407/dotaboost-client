@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import cls from './lowPriority.module.scss'
 import Button from 'shared/ui/button/Button'
+import {InputRange} from "widgets/inputRange/ui/inputRange";
 
 
 
@@ -12,28 +13,50 @@ const HOURS_TO_FIRST_GAME = 2
 
 
 export const LowPriority: FC = ({ }) => {
+    const [lowerDivWidth, setLowerDivWidth ] = React.useState(0)
     const [amoutOfGames, setAmountOfGames] = React.useState(MIN_GAMES)
     const [estimatedTime, setEstimatedTime] = React.useState(amoutOfGames===MIN_GAMES?2:amoutOfGames*HOURS_PER_GAME)
     const [estimatedPrice, setEstimatedPrice] = React.useState(amoutOfGames * PRICE_PER_GAME)
+    React.useEffect(()=>{
+        // fillDiv()
+    },[amoutOfGames])
+    // const fillDiv = ()=>{
+    //     const indicator = document.getElementById('indicator') as HTMLDivElement
+    //     const rangeWidth = (document.getElementById('range') as HTMLInputElement).width
+    //
+    //     const width = amoutOfGames * 100 /MAX_GAMES
+    //     indicator.style.width = width +"%"
+    // }
+
     return (
         <div className={cls.lowPriorityContainer}>
             <h2 className={cls.header}>Low Priority</h2>
-            <div className={cls.inputContainer}>
-                <input type="range" className={cls.inputRange} min="0" max="5" step="1" />
-                <h3 className={cls.estimatedPrice}>{amoutOfGames}</h3>
+            <div className={cls.rangeContainer}>
+                <div className={cls.inputContent}>
+                    <InputRange
+                        min={MIN_GAMES}
+                        max={MAX_GAMES}
+                        step={1}
+                        value={amoutOfGames}
+                        onValueChange={(num)=>setAmountOfGames(num)}
+                    />
+                </div>
+                <div className={cls.gameAmount}>{amoutOfGames}</div>
             </div>
-            <p className={cls.note}>Select number of the remaining low priority games</p>
             <div className={cls.estimatedPriceBlock}>
-                <p className={cls.estimatedTime}>
-                    Estimated time for completion <strong>  {estimatedTime} hours</strong>
-                </p>
-                <h3 className={cls.estimatedPrice}>
+                <div className={cls.recomendation}>Select number of the remaining low priority <br></br> games </div>
+                <div className={cls.estimatedTime}>
+                    Estimated time for completion:&nbsp;&nbsp; <strong style={{color:"#2CA8FF"}}>  {estimatedTime} hours</strong>
+                </div>
+                <div className={cls.estimatedPrice}>
                     ${estimatedPrice}
-                </h3>
+                </div>
                 <Button className={cls.buyBtn} onClick={() => { }}>
                     Buy
                 </Button>
             </div>
+            {/*<p className={cls.note}>Select number of the remaining low priority games</p>*/}
+
         </div>
 
     )
