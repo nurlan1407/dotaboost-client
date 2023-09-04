@@ -29,13 +29,17 @@ const App = () => {
     const closeDrawer = () =>{
         dispatch(toggleDrawer(false))
     }
+    const toggleDrawerState = () =>{
+        if(showDrawer === true) dispatch(toggleDrawer(false))
+        else dispatch(toggleDrawer(true))
+    }
 
     document.body.style.background = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.2)), url(${mainBg})`
     document.body.style.backgroundSize = "cover"
 
     return (
         <>
-            <SideDrawer showDrawer={showDrawer}/>
+            <SideDrawer showDrawer={showDrawer}  closeDrawer={closeDrawer}/>
             {showDrawer && <BackDrop closeDrawer={closeDrawer}/>}
             <div>
                 <div className={`overlay ${showModal ? 'openIt' : 'closeIt'}`}>

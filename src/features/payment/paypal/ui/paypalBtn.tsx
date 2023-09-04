@@ -6,8 +6,11 @@ interface PaypalBtnProps{
 
 }
 
+
+
 export const PaypalBtn:React.FC = () =>{
     const paypalBtnRef = React.useRef(null)
+    const [paypalInstance,setPaypalInstance] = React.useState()
     React.useEffect(()=>{
         loadScript({clientId:"AY0dnmACG1u1jyrFGmSQU9R857JY4T2nI_bQ_VYEHR8fshsaRLFD8HRuK-hkRbBkfwrL8hCmcc7gIvTF"})
             .then((paypal)=>{
@@ -29,29 +32,31 @@ export const PaypalBtn:React.FC = () =>{
                         },
                         style:{
                             color:"blue",
-                            shape:"pill"
+                            shape:"pill",
+                            tagline:false,
+                            height:40,
                         },
-                        
+                        fundingSource:"paypal",
                         onApprove: async (data,actions)=>{
                             const order = await actions.order.capture()
                             console.log("success", order);
                         },
                         onError:(err)=>{
                             console.log(err)
-                        }
+                        },
+                        
                     })
                     .render(paypalBtnRef.current)
                     .catch((error)=>{
                         console.error("paypal error: "+ error)
                     })
-            }).catch((error)=>{
-            console.error("Failed to load paypal SKD: "+ error)
+            }).catch((error)=>{console.error("Failed to load paypal SKD: "+ error)
         })
     },[])
 
 
 
     return(
-        <div ref={paypalBtnRef} id={"paypalBtn"}></div>
+        <div ref={paypalBtnRef} style={{maxHeight:"39px", marginBottom:"2px"}} id={"paypalBtn"}></div>
     )
 }
