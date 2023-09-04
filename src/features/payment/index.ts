@@ -1,1 +1,1 @@
-export {PaymentForm} from './ui/paymentForm'
+export {CardModal} from './ui/cardModal'

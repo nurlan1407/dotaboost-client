@@ -9,6 +9,8 @@ import './public/fonts/Raleway-Regular.ttf'
 //redux store
 import {store} from 'app/providers/store'
 import {Provider} from 'react-redux'
+import {BackDrop, SideDrawer} from "widgets/drawer";
+
 
 const root = document.getElementById('root')
 ReactDom.render(

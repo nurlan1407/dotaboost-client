@@ -2,6 +2,7 @@ import React, { FC, useEffect } from 'react';
 import cls from './authModal.module.scss';
 import Logo from 'shared/ui/logo/logo';
 import Button from 'shared/ui/button/Button';
+import {CloseBtn} from "shared/ui/closeButton/closeButton";
 
 
 type AuthMode = 'login' | 'register';
@@ -15,7 +16,8 @@ export const AuthModal: FC<ModalProps> = ({ onClose}) => {
     return (
         <div className={cls.modal}>
             <div className={cls.modalContent}>
-                <button aria-label='delete item' className={cls.closeBtn} onClick={()=>onClose()} type='button'>X</button>
+                <CloseBtn onClick={()=>{onClose()}}/>
+                {/*<button aria-label='delete item' className={cls.closeBtn} onClick={()=>onClose()} type='button'>X</button>*/}
                 <Logo className={cls.black} />
                 {/*<form className={cls.inputContainer}>*/}
                 {/*    <input className={cls.input} type="email" placeholder="Email"></input>*/}

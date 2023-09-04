@@ -8,7 +8,8 @@ import rank2 from 'public/assets/rank_2.png'
 
 import { Rank as RankObject, ranks } from 'shared/config/mmrBoostConfig/mmrBoostConfig'
 import {Link} from "react-router-dom";
-import {AppRoutes, RoutePath} from "shared/config/routerConfig/routerConfig";
+import {useDispatch} from "react-redux";
+import { toggleDrawer} from "app/providers/store/reducers/htmlStates";
 
 
 const MAX_MMR = 8000
@@ -29,6 +30,7 @@ function kak(MMR: number, setRankImage: (rankObj: RankObject) => void) {
 
 
 export const MmrBoost: FC = ({ }) => {
+    const dispatch = useDispatch()
     const [currentMMR, setCurrentMMR] = React.useState(1000)
     const [desiredMMR, setDesiredMMR] = React.useState(5000)
     const [estimatedTime, setEstimatedTime] = React.useState(Math.ceil((desiredMMR - currentMMR)/MMR_PER_DAY))
@@ -139,7 +141,9 @@ export const MmrBoost: FC = ({ }) => {
                 <h3 className={cls.estimatedPrice}>
                     ${estimatedPrice}
                 </h3>
-                    <Link to={RoutePath.payment}><Button className={cls.buyBtn} onClick={()=>{}}>Checkout</Button></Link>
+                    <Button className={cls.buyBtn} onClick={()=>{
+                        dispatch(toggleDrawer(true))
+                    }}>Checkout</Button>
             </div>
         </div>
     )

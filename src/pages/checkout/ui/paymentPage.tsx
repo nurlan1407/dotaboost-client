@@ -14,8 +14,10 @@ const PaymentPage: FC<PaymentPageProps> = ({ }) => {
                     <h2 className={cls.header}>Order #212</h2>
                     <form className={cls.inputContainer}>
                         <input className={cls.input} onChange={()=>{}} type="email" placeholder="Enter your Email"></input>
-                        <input className={cls.input} onChange={()=>{}} type="text" placeholder="steamID"></input>
-                        <input className={cls.input} onChange={()=>{}} type="password" placeholder="Password"></input>
+                        <div className={cls.gameAccountCredentials}>
+                            <input className={cls.input} onChange={()=>{}} type="text" placeholder="steamID"></input>
+                            <input className={cls.input} onChange={()=>{}} type="password" placeholder="Password"></input>
+                        </div>
                         <select className={cls.selection}>
                             <option className={cls.option}>{selectedPayment?selectedPayment:'Select payment option'}</option>
                             {paymentOptions.map((option,index)=>{

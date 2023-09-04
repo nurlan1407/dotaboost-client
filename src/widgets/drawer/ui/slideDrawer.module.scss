@@ -1,0 +1,68 @@
+@import "app/styles/variables/mixins";
+
+.sideDrawer{
+  display: flex;
+  flex-direction: column;
+  //grid-template-rows: 15% 60% 25%;
+  grid-template-columns: 100%;
+  height: 100%;
+  width: 30%;
+  background: white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 200;
+  box-shadow: 1px 0px 7px rgba(0,0,0,0.5);
+  transition: all 0.3s ease-out;
+  transform: translate(100%);
+  color: black;
+}
+
+.open{
+  transform: translate(0);
+}
+
+.sideDrawerHeader{
+  display: flex;
+  height: 96px;
+  padding: 10px 20px;
+  //height: 96px;
+  justify-content: space-between;
+  border:black;
+  align-items: center;
+  background-color: #F7F7F8;
+  h3{
+    font-weight: 500;
+  }
+}
+
+.closeBtnSpecific{
+  position: relative;
+  top: 0;
+  right: 0;
+}
+
+
+.checkoutBlock{
+  position: fixed;
+  bottom: 0;
+  padding: 10px 20px;
+}
+
+
+.agreement{
+ @include lightText
+}
+
+.priceBlock{
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  div{
+    @include normalSmallText
+  }
+}
+
+
+
