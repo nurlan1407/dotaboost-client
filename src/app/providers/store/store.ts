@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import htmlReducer from "./reducers/htmlStates";
 import userReducer from "entities/user/model/slice";
+import orderReducer from "entities/order/model/slice";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 
 export const store = configureStore({
   reducer: {
     htmlStatesReducer: htmlReducer,
-    userReducer: userReducer
+    userReducer: userReducer,
+    orderReducer: orderReducer
   }
 })
 

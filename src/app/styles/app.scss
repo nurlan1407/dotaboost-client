@@ -47,3 +47,36 @@ body{
 }
 
 
+
+@keyframes nextPage {
+    0% {
+        opacity: 0;
+        transform: translate(10em, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes prevPage {
+    0% {
+        opacity: 0;
+        transform: translate(-10em, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+:global{
+    .drawerNextPage{
+        animation: nextPage 0.5s ease;
+    }
+    .drawerPrevPage{
+        animation: prevPage 0.5s ease-in-out;
+    }
+}

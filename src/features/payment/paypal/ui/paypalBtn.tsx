@@ -44,7 +44,6 @@ export const PaypalBtn:React.FC = () =>{
                         onError:(err)=>{
                             console.log(err)
                         },
-                        
                     })
                     .render(paypalBtnRef.current)
                     .catch((error)=>{

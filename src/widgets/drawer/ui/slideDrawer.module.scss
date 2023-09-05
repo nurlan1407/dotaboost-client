@@ -74,38 +74,14 @@
   font-family: cursive;
 }
 
-
-
-
-@keyframes nextPage {
-  0% {
-    opacity: 0;
-    transform: translate(10em, 0);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
+.buyBtn{
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #4a64f7;
+  border-radius: 25px;
+  letter-spacing: 1.2px;
 }
 
-@keyframes prevPage {
-  0% {
-    opacity: 0;
-    transform: translate(-10em, 0);
-  }
 
-  100% {
-    opacity: 1;
-    transform: translate(0, 0);
-  }
-}
 
-:global{
-  .drawerNextPage{
-   animation: nextPage 0.5s ease;
-  }
-  .drawerPrevPage{
-    animation: prevPage 0.5s ease-in-out;
-  }
-}
