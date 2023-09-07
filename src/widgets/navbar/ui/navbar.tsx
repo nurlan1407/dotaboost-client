@@ -6,7 +6,10 @@ import { useOnHoverOutside } from 'shared/hooks/useOnHoverOutside';
 import {useDispatch} from "react-redux";
 import {showAuthModal} from "app/providers/store/reducers/htmlStates";
 import {useAppSelector} from "app/providers/store/store";
+import {useLocation} from "react-router-dom";
 
+//dont show navbar in payment page
+const withoutSidebarRoutes = ["/payment"];
 
 
 interface NavbarProps{
@@ -14,6 +17,8 @@ interface NavbarProps{
   onOpen:()=>void
 }
 const   Navbar: FC<NavbarProps> = ({onOpen }) => {
+  const {pathname} = useLocation()
+  if(withoutSidebarRoutes.some((item)=>pathname.includes(item))) return <></>
   const dispatch = useDispatch()
   const user = useAppSelector(state=>state.userReducer.user)
   const dropdownRef = React.useRef(null); // Create a reference for dropdown container
@@ -49,6 +54,8 @@ const   Navbar: FC<NavbarProps> = ({onOpen }) => {
           </ul>
       </nav>
       </div>
+      <hr className='divider'/>
+
     </div>
   )
 }

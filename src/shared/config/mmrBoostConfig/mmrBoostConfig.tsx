@@ -7,6 +7,14 @@ import rank6 from 'public/assets/rank_6.png'
 import rank7 from 'public/assets/rank_7.png'
 
 
+export function kak(MMR: number, setRankImage: (rankObj: Rank) => void) {
+    const rank = ranks.filter((item: Rank) => {
+        if (MMR >= item.min && MMR <= item.max) {
+            setRankImage(item)
+            return
+        }
+    })
+}
 
 export interface Rank{
     min:number

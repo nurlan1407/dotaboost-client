@@ -7,9 +7,9 @@ import {RootState} from './providers/store'
 import {AuthModal} from 'features/authentification/AuthModal'
 import {useAppSelector} from "app/providers/store/store";
 import {showAuthModal} from "app/providers/store/reducers/htmlStates";
-import mainBg from 'public/assets/bg_mainPage.jpg'
+import mainBg from 'bg_mainPage.jpg'
 import {Footer} from "widgets/footer";
-import {BackDrop, SideDrawer} from "widgets/drawer";
+import {BackDrop, SideDrawer} from "features/payment/ui/drawer";
 import {toggleDrawer}  from "app/providers/store/reducers/htmlStates";
 
 const App = () => {
@@ -36,9 +36,8 @@ const App = () => {
 
     document.body.style.background = `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.2)), url(${mainBg})`
     document.body.style.backgroundSize = "cover"
-
     return (
-        <>
+        <div style={{overflowX:"hidden"}} className={"app"}>
             <SideDrawer showDrawer={showDrawer}  closeDrawer={closeDrawer}/>
             {showDrawer && <BackDrop closeDrawer={closeDrawer}/>}
             <div>
@@ -47,15 +46,13 @@ const App = () => {
                 </div>
                 <div className='app'>
                     <Navbar onOpen={onOpen}/>
-                    <hr className='divider'/>
                     <div>
                         <AppRouter></AppRouter>
                     </div>
-                    <hr className='divider'/>
                     <Footer/>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

@@ -1,15 +1,15 @@
 .paymentPage{
   position: relative;
-  width: 100%;
-  height: fit-content;
+  height: 100%;
   color: var(--inverse-primary-color);
   h3{
     color: black;
   }
+
 }
 
 .container{
-  padding-top: var(--navbar-height);
+  //padding-top: var(--navbar-height);
 }
 
 .header{
@@ -22,14 +22,15 @@
 }
 
 .orderContainer{
-  background-color: #F1F2F4;
   height: 100%;
+  width: 50%;
   padding: 20px 40px;
+  margin: 0 auto;
+  background-color: white;
+
 }
 
 .checkoutContent{
-  display: flex;
-  justify-content: space-between;
 }
 .gameAccountCredentials{
   position: relative;

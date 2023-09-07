@@ -6,7 +6,7 @@ import cls from './mrrBoost.module.scss'
 import rank1 from 'public/assets/rank_1.png'
 import rank2 from 'public/assets/rank_2.png'
 
-import { Rank as RankObject, ranks } from 'shared/config/mmrBoostConfig/mmrBoostConfig'
+import { Rank as RankObject, ranks,kak } from 'shared/config/mmrBoostConfig/mmrBoostConfig'
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { toggleDrawer} from "app/providers/store/reducers/htmlStates";
@@ -18,14 +18,7 @@ const DEFAULT_VARIANCE = 80
 const MMR_PER_DAY = 250
 const PRICE_FOR_MMR = 7
 
-function kak(MMR: number, setRankImage: (rankObj: RankObject) => void) {
-    const rank = ranks.filter((item: RankObject) => {
-        if (MMR >= item.min && MMR <= item.max) {
-            setRankImage(item)
-            return
-        }
-    })
-}
+
 
 
 

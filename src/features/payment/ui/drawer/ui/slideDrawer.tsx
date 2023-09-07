@@ -4,7 +4,10 @@ import {CloseBtn} from "shared/ui/closeButton/closeButton";
 import Button from "shared/ui/button/Button";
 import {PaypalBtn} from "features/payment/paypal/ui/paypalBtn";
 import {Link} from "react-router-dom";
-
+import {CartItem} from "pages/checkout/ui/cartItem";
+import {MMRBoost, Order} from "entities/order/model/types";
+import {Rank as RankObject, ranks} from "shared/config/mmrBoostConfig/mmrBoostConfig";
+import MMRBoostImage from 'public/assets/card_mmrBoost.png'
 
 interface SideDrawerInterface {
     showDrawer: boolean,
@@ -27,13 +30,23 @@ export const SideDrawer: React.FC<SideDrawerInterface> = ({showDrawer, closeDraw
         setCurrentPageType("cart")
     }
 
+    const orderedService:MMRBoost ={
+        fromMMR:1,
+        toMMR:2000,
+        toMMRRankImage: ranks[0].img,
+        fromMMRRankImage:ranks[1].img,
+        type:"Boost"
+    }
+    const order:Order ={
+        service:orderedService,
+        status:"UnPayed"
+    }
     return (
         <div className={`${cls.sideDrawer} ${showDrawer ? cls.open : ""}`}>
             <div className={cls.sideDrawerHeader}>
                 <h3 className={cls.sideDrawerHeaderTitle}>Cart Summary</h3>
                 <CloseBtn onClick={() => {
-                    if (currentPageType === "cart") closeDrawer()
-                    else if (currentPageType === "stripePayment") handleFirstPage()
+                    closeDrawer()
                 }} className={cls.closeBtnSpecific}/>
             </div>
             <div className={cls.pageWrapper}
@@ -45,6 +58,7 @@ export const SideDrawer: React.FC<SideDrawerInterface> = ({showDrawer, closeDraw
                  }}
             >
                 <div className={cls.cartContent}>
+                    <CartItem item={{title:"MMRBoost", imgUrl:MMRBoostImage}} onDeleteClicked={()=>{}} order={order}></CartItem>
                 </div>
                 <div className={cls.checkoutBlock}>
                     <div className={cls.agreement}>Shipping and taxes will be calculated at checkout.</div>
@@ -53,7 +67,7 @@ export const SideDrawer: React.FC<SideDrawerInterface> = ({showDrawer, closeDraw
                         <div className={cls.total}><strong>228 USD</strong></div>
                     </div>
                     <Link to={"/payment"}>
-                        <Button className={`${cls.buyBtn}`} onClick={()=>{}}>Checkout</Button>
+                        <Button className={`${cls.buyBtn}`} onClick={()=>{closeDrawer()}}>Checkout</Button>
                     </Link>
                 </div>
             </div>

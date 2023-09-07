@@ -1,6 +1,6 @@
 import App from "app/app";
 import React from "react";
-import './app/styles/index.scss'
+import './index.scss'
 import ReactDom from 'react-dom'
 import { BrowserRouter } from "react-router-dom";
 //font
@@ -9,7 +9,7 @@ import './public/fonts/Raleway-Regular.ttf'
 //redux store
 import {store} from 'app/providers/store'
 import {Provider} from 'react-redux'
-import {BackDrop, SideDrawer} from "widgets/drawer";
+import {BackDrop, SideDrawer} from "features/payment/ui/drawer";
 
 
 const root = document.getElementById('root')

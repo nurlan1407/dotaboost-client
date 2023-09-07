@@ -15,15 +15,35 @@ const PaymentPage: FC<PaymentPageProps> = ({}) => {
     const paymentOptions = ["Paypal", "Stripe"]
     const [selectedPayment, setSelectedPayment] = React.useState<string | null>(null)
 
-
+    // document.body.style.backdropFilter ="blur(5px)"
     return (
         <div className={cls.paymentPage}>
             <div className={cls.container}>
                 <div className={'wrapper'}>
                     <div className={cls.orderContainer}>
-                        <h2>Order #1337</h2>
+                        <div className={cls.header}>
+                            <h2>Order #1337</h2>
+                        </div>
                         <div className={cls.checkoutContent}>
-                            <div className={cls.checkoutPager}>
+                                {/*<div className={cls.orderSummaryContainer}>*/}
+                                {/*    <div className={cls.orderSummary}>*/}
+                                {/*        <div className={cls.orderSummaryHeader}>*/}
+                                {/*            <h3>Order summary</h3>*/}
+                                {/*            <Link>Edit</Link>*/}
+                                {/*        </div>*/}
+                                {/*        <div className={cls.cartContent}>*/}
+                                {/*            <div className={cls.cartItem}>*/}
+                                {/*                <p>MMR boost</p>*/}
+                                {/*                <p>x1</p>*/}
+                                {/*                <p>$0.72</p>*/}
+                                {/*            </div>*/}
+                                {/*        </div>*/}
+                                {/*        <div className={cls.totalContainer}>*/}
+                                {/*            <h3>Total</h3>*/}
+                                {/*            <div><strong>$0.72</strong></div>*/}
+                                {/*        </div>*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
                                 <div className={cls.gameAccountCredentials}>
                                     <StepIndicator step={1} className={cls.indicator}/>
                                     <h3>Details</h3>
@@ -59,26 +79,6 @@ const PaymentPage: FC<PaymentPageProps> = ({}) => {
                                 {/*        <div>Card payment, giropay,<br></br>iDEAL, Bancontact and more</div>*/}
                                 {/*    </div>*/}
                                 {/*</div>*/}
-                            </div>
-                            <div className={cls.orderSummaryContainer}>
-                                <div className={cls.orderSummary}>
-                                    <div className={cls.orderSummaryHeader}>
-                                        <h3>Order summary</h3>
-                                        <Link>Edit</Link>
-                                    </div>
-                                    <div className={cls.cartContent}>
-                                        <div className={cls.cartItem}>
-                                            <p>MMR boost</p>
-                                            <p>x1</p>
-                                            <p>$0.72</p>
-                                        </div>
-                                    </div>
-                                    <div className={cls.totalContainer}>
-                                        <h3>Total</h3>
-                                        <div><strong>$0.72</strong></div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

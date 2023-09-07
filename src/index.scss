@@ -1,23 +1,27 @@
-@import "./reset.scss";
-@import "./variables/globals.scss";
-@import "./themes/dark.scss";
-@import "./themes/light.scss";
+@import "app/styles/reset";
+@import "app/styles/variables/globals";
+@import "app/styles/themes/dark";
+@import "app/styles/themes/light";
 
 @font-face {
   font-family: "Logo";
-  src: local("Raleway-ExtraBoldItalic"), url("../../public/fonts/Raleway-ExtraBoldItalic.ttf") format("woff");
+  src: local("Raleway-ExtraBoldItalic"), url("public/fonts/Raleway-ExtraBoldItalic.ttf") format("woff");
 }
 
 @font-face {
   font-family: "Railway";
-  src: local("Railwat-Regular"), url("../../public/fonts/Raleway-Regular.ttf") format("woff");
+  src: local("Railwat-Regular"), url("public/fonts/Raleway-Regular.ttf") format("woff");
 }
 
 
 body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  color: var(--primary-color)
+  color: var(--primary-color);
+  background-image: url("bg_mainPage.jpg");
+  background-size: cover;
+
 }
 
 * {

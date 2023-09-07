@@ -1,0 +1,87 @@
+.itemContainer {
+  padding: 20px 20px;
+}
+
+.itemHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.serviceInfo {
+  display: flex;
+  width: fit-content;
+  gap: 10px;
+
+  img {
+    width: 40px;
+    height: 25px;
+  }
+
+  .title {
+    font-size: var(--font-size-m);
+    padding-top: 2px;
+  }
+
+}
+
+
+.serviceContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0px;
+  .checkBoxContainer{
+    display: flex;
+    align-items: center;
+  }
+
+  label{
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+  input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    padding: 0;
+    height: 18px;
+    outline: 1px grey solid;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: outline-color 0.5s ease-in-out;
+    &:after {
+      //font-family: "Font Awesome 4.70";
+      font-weight: 900;
+      content: '\2714';
+      font-size: 14px;
+      color: white;
+      display: none;
+    }
+    &:hover{
+      outline-color: #2CA8FF;
+    }
+
+    &:checked:after {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #2CA8FF;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+  .quantityContainer{
+    .label{
+      font-size: 14px;
+      font-weight: 400;
+    }
+    .content{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+}

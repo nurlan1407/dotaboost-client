@@ -1,0 +1,49 @@
+.inputNumber{
+  width: 140px;
+  height: 52px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  border: var(--not-active-color) 1px solid;
+  transition: border-color 1s ease-in-out;
+  &:hover{
+    border-color: var(--active-color);
+  }
+
+  .inputNumBtn{
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: grey;
+    font-weight: 400;
+    text-align: center;
+    //font-weight: 600;
+    background-color: #E7F6FE;
+    &:hover{
+
+    }
+
+    .active{
+      background-color: #E7F6FE;
+      color: var(--not-active-color);
+
+    }
+    .notActive{
+      background-color: #F1F2F4;
+      color: var(--not-active-color);
+    }
+  }
+  .value{
+    font-size: var(--font-size-m);
+    font-weight: 500;
+    text-align: center;
+  }
+}
