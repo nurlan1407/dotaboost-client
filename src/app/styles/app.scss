@@ -3,6 +3,7 @@
 }
 .wrapper{
     max-width: 1300px;
+    height: 100%;
     margin: 0 auto;
 }
 .overlay {
@@ -47,6 +48,6 @@
 
 
 .app{
-    background-image: url("../../bg_mainPage.jpg");
-
+    background-image: url("public/assets/bg_mainPage.jpg");
+    height: 100%;
 }

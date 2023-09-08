@@ -9,8 +9,6 @@ interface DeleteButtonProps{
 export const DeleteButton:React.FC<DeleteButtonProps> = ({onCLick}) =>{
     return(
         // <></>
-        <Button className={cls.btn} onClick={onCLick}>
-            <strong><i className ="far fa-trash" style={{ color:"black"}}/></strong>
-        </Button>
+        <Button className={cls.btn} onClick={onCLick}></Button>
     )
 }

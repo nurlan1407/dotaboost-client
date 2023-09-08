@@ -10,7 +10,16 @@
   cursor: pointer;
   border: none;
 }
-
+.btn:after{
+  top: 50%;
+  left: 50%;
+  content: "\f1f8 ";
+  color:var(--inverse-primary-color);
+}
+.btn:hover{
+  border: var(--active-color) 1px solid;
+  transition: all 0.4s ease-in-out;
+}
 .icon{
 
 }

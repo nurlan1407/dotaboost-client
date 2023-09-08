@@ -19,7 +19,7 @@ body {
   margin: 0;
   padding: 0;
   color: var(--primary-color);
-  background-image: url("bg_mainPage.jpg");
+  background-image: url("public/assets/bg_mainPage.jpg");
   background-size: cover;
 
 }
@@ -71,4 +71,12 @@ h2{
 
 br{
   display: block;
+}
+
+html,
+body {
+  height: 100%;
+}
+#root{
+  height: 100%;
 }

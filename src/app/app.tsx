@@ -1,13 +1,12 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {AppRouter} from './providers/router'
 import Navbar from 'widgets/navbar/ui/navbar'
 import {useDispatch, useSelector} from 'react-redux'
 import './styles/app.scss'
-import {RootState} from './providers/store'
 import {AuthModal} from 'features/authentification/AuthModal'
 import {useAppSelector} from "app/providers/store/store";
 import {showAuthModal} from "app/providers/store/reducers/htmlStates";
-import mainBg from 'bg_mainPage.jpg'
+import mainBg from 'public/assets/bg_mainPage.jpg'
 import {Footer} from "widgets/footer";
 import {BackDrop, SideDrawer} from "features/payment/ui/drawer";
 import {toggleDrawer}  from "app/providers/store/reducers/htmlStates";
@@ -40,15 +39,13 @@ const App = () => {
         <div style={{overflowX:"hidden"}} className={"app"}>
             <SideDrawer showDrawer={showDrawer}  closeDrawer={closeDrawer}/>
             {showDrawer && <BackDrop closeDrawer={closeDrawer}/>}
-            <div>
+            <div className={"app"}>
                 <div className={`overlay ${showModal ? 'openIt' : 'closeIt'}`}>
                     {showModal && <AuthModal onClose={onClose}></AuthModal>}
                 </div>
                 <div className='app'>
                     <Navbar onOpen={onOpen}/>
-                    <div>
                         <AppRouter></AppRouter>
-                    </div>
                     <Footer/>
                 </div>
             </div>

@@ -10,6 +10,7 @@ import behaviourScoreCardBg from 'public/assets/card_behaviour.png'
 import calibrationCardBg from 'public/assets/card_calibration.png'
 import lowPriorityCardBg from 'public/assets/card_lowPriority.png'
 import Navbar from "widgets/navbar/ui/navbar";
+import {DotaServices} from "shared/config/dotaServices/dotaServices";
 
 
 const MainPage: FC = ({ }) => {

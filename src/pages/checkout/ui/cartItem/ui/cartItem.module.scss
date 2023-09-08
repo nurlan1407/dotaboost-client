@@ -1,7 +1,12 @@
 .itemContainer {
-  padding: 20px 20px;
+  hr{
+    color:var(--primary-color)
+  }
 }
 
+.itemWrapper{
+  padding: 20px 20px;
+}
 .itemHeading {
   display: flex;
   justify-content: space-between;
@@ -31,17 +36,19 @@
   flex-direction: column;
   gap: 10px;
   padding: 10px 0px;
-  .checkBoxContainer{
+
+  .checkBoxContainer {
     display: flex;
     align-items: center;
   }
 
-  label{
+  label {
     cursor: pointer;
     user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
   }
+
   input[type="checkbox"] {
     -webkit-appearance: none;
     appearance: none;
@@ -52,6 +59,7 @@
     border-radius: 3px;
     cursor: pointer;
     transition: outline-color 0.5s ease-in-out;
+
     &:after {
       //font-family: "Font Awesome 4.70";
       font-weight: 900;
@@ -60,7 +68,8 @@
       color: white;
       display: none;
     }
-    &:hover{
+
+    &:hover {
       outline-color: #2CA8FF;
     }
 
@@ -72,16 +81,21 @@
       transition: all 0.2s ease-in-out;
     }
   }
-  .quantityContainer{
-    .label{
-      font-size: 14px;
-      font-weight: 400;
-    }
-    .content{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-  }
+}
 
+.quantityContainer {
+  padding-top: 20px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 400;
+
+  color: var(--not-active-color);
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

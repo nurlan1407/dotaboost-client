@@ -2,15 +2,13 @@ import React, { FC } from 'react'
 import { Rank } from 'widgets/rank'
 import Button from 'shared/ui/button/Button'
 import cls from './mrrBoost.module.scss'
-//assets
-import rank1 from 'public/assets/rank_1.png'
-import rank2 from 'public/assets/rank_2.png'
-
 import { Rank as RankObject, ranks,kak } from 'shared/config/mmrBoostConfig/mmrBoostConfig'
 import {Link} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { toggleDrawer} from "app/providers/store/reducers/htmlStates";
-
+import {addOrder, setCurrentService} from "entities/order/model/slice";
+import {Order} from "entities/order/model/types";
+import {DotaServices, MMRBoost} from "shared/config/dotaServices/dotaServices";
 
 const MAX_MMR = 8000
 const DIVISION = 1000 //как делится в полоске
@@ -24,6 +22,7 @@ const PRICE_FOR_MMR = 7
 
 export const MmrBoost: FC = ({ }) => {
     const dispatch = useDispatch()
+    dispatch(setCurrentService(DotaServices.MMRBoost))
     const [currentMMR, setCurrentMMR] = React.useState(1000)
     const [desiredMMR, setDesiredMMR] = React.useState(5000)
     const [estimatedTime, setEstimatedTime] = React.useState(Math.ceil((desiredMMR - currentMMR)/MMR_PER_DAY))
@@ -135,7 +134,20 @@ export const MmrBoost: FC = ({ }) => {
                     ${estimatedPrice}
                 </h3>
                     <Button className={cls.buyBtn} onClick={()=>{
+                        //create and order
+                        const mmrBoost:MMRBoost={
+                            fromMMR:currentMMR ,
+                            toMMR:desiredMMR,
+                            fromMMRRankImage:currentRankImage.img,
+                            toMMRRankImage:desiredRankImage.img,
+                            type:"Boost"
+                        }
+                        const newOrder:Order ={
+                            status:"UnPayed",
+                            service: mmrBoost
+                        }
                         dispatch(toggleDrawer(true))
+                        dispatch(addOrder(newOrder))
                     }}>Checkout</Button>
             </div>
         </div>

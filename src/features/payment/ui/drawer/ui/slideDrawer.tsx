@@ -5,13 +5,16 @@ import Button from "shared/ui/button/Button";
 import {PaypalBtn} from "features/payment/paypal/ui/paypalBtn";
 import {Link} from "react-router-dom";
 import {CartItem} from "pages/checkout/ui/cartItem";
-import {MMRBoost, Order} from "entities/order/model/types";
+import {Order} from "entities/order/model/types";
+import {MMRBoost} from "shared/config/dotaServices/dotaServices";
 import {Rank as RankObject, ranks} from "shared/config/mmrBoostConfig/mmrBoostConfig";
 import MMRBoostImage from 'public/assets/card_mmrBoost.png'
+import {useAppSelector} from "app/providers/store/store";
+import {ServiceInstance} from "widgets/card/types";
 
 interface SideDrawerInterface {
     showDrawer: boolean,
-    closeDrawer: () => void
+    closeDrawer: () => void,
 }
 
 type SliderPageType = "stripePayment" | "cart"
@@ -19,27 +22,18 @@ export const SideDrawer: React.FC<SideDrawerInterface> = ({showDrawer, closeDraw
     const contentContainerRef = React.useRef<null | HTMLDivElement>(null)
     const [currentPageType, setCurrentPageType] = React.useState<SliderPageType>("cart")
 
-
-    const handleSecondPage = () => {
-        contentContainerRef.current.className = "drawerPrevPage"
-        setCurrentPageType("stripePayment")
-    }
-
-    const handleFirstPage = () => {
-        contentContainerRef.current.className = "drawerNextPage"
-        setCurrentPageType("cart")
-    }
-
-    const orderedService:MMRBoost ={
-        fromMMR:1,
-        toMMR:2000,
+    const currentOrder = useAppSelector(state => state.orderReducer.basketOrder)
+    const currentService = useAppSelector(state => state.orderReducer.currentService)
+    const orderedService: MMRBoost = {
+        fromMMR: 1,
+        toMMR: 2000,
         toMMRRankImage: ranks[0].img,
-        fromMMRRankImage:ranks[1].img,
-        type:"Boost"
+        fromMMRRankImage: ranks[1].img,
+        type: "Boost"
     }
-    const order:Order ={
-        service:orderedService,
-        status:"UnPayed"
+    const order: Order = {
+        service: orderedService,
+        status: "UnPayed"
     }
     return (
         <div className={`${cls.sideDrawer} ${showDrawer ? cls.open : ""}`}>
@@ -49,27 +43,22 @@ export const SideDrawer: React.FC<SideDrawerInterface> = ({showDrawer, closeDraw
                     closeDrawer()
                 }} className={cls.closeBtnSpecific}/>
             </div>
-            <div className={cls.pageWrapper}
-                 ref={contentContainerRef}
-                 onAnimationEnd={() => {
-                     if (contentContainerRef.current) {
-                         contentContainerRef.current.style.animation = ""
-                     }
-                 }}
-            >
-                <div className={cls.cartContent}>
-                    <CartItem item={{title:"MMRBoost", imgUrl:MMRBoostImage}} onDeleteClicked={()=>{}} order={order}></CartItem>
+            <div className={cls.cartContent}>
+                {(currentService && currentOrder)?
+                    <CartItem item={currentService} onDeleteClicked={() => {}} order={currentOrder}/>:""
+                }
+            </div>
+            <div className={cls.checkoutBlock}>
+                <div className={cls.agreement}>Shipping and taxes will be calculated at checkout.</div>
+                <div className={cls.priceBlock}>
+                    <div className={cls.total}><strong>Total</strong></div>
+                    <div className={cls.total}><strong>228 USD</strong></div>
                 </div>
-                <div className={cls.checkoutBlock}>
-                    <div className={cls.agreement}>Shipping and taxes will be calculated at checkout.</div>
-                    <div className={cls.priceBlock}>
-                        <div className={cls.total}><strong>Total</strong></div>
-                        <div className={cls.total}><strong>228 USD</strong></div>
-                    </div>
-                    <Link to={"/payment"}>
-                        <Button className={`${cls.buyBtn}`} onClick={()=>{closeDrawer()}}>Checkout</Button>
-                    </Link>
-                </div>
+                <Link to={"/payment"}>
+                    <Button className={`${cls.buyBtn}`} onClick={() => {
+                        closeDrawer()
+                    }}>Checkout</Button>
+                </Link>
             </div>
         </div>
     )

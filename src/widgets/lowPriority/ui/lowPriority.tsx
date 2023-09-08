@@ -2,6 +2,11 @@ import React, { FC } from 'react'
 import cls from './lowPriority.module.scss'
 import Button from 'shared/ui/button/Button'
 import {InputRange} from "widgets/inputRange/ui/inputRange";
+import {DotaServices, LowPriority as LowPriorityType, MMRBoost} from "shared/config/dotaServices/dotaServices";
+import {Order} from "entities/order/model/types";
+import {toggleDrawer} from "app/providers/store/reducers/htmlStates";
+import {addOrder, setCurrentService} from "entities/order/model/slice";
+import {useDispatch} from "react-redux";
 
 
 
@@ -13,6 +18,8 @@ const HOURS_TO_FIRST_GAME = 2
 
 
 export const LowPriority: FC = ({ }) => {
+    const dispatch = useDispatch()
+    dispatch(setCurrentService(DotaServices["Low Priority"]))
     const [lowerDivWidth, setLowerDivWidth ] = React.useState(0)
     const [amoutOfGames, setAmountOfGames] = React.useState(MIN_GAMES)
     const [estimatedTime, setEstimatedTime] = React.useState(amoutOfGames===MIN_GAMES?2:amoutOfGames*HOURS_PER_GAME)
@@ -51,8 +58,19 @@ export const LowPriority: FC = ({ }) => {
                 <div className={cls.estimatedPrice}>
                     ${estimatedPrice}
                 </div>
-                <Button className={cls.buyBtn} onClick={() => { }}>
-                    Buy
+                <Button className={cls.buyBtn} onClick={() => {
+                    const lowPriority:LowPriorityType={
+                        amount:amoutOfGames,
+                        type:"countable"
+                    }
+                    const newOrder:Order ={
+                        status:"UnPayed",
+                        service: lowPriority
+                    }
+                    dispatch(toggleDrawer(true))
+                    dispatch(addOrder(newOrder))
+                }}>
+                    Checkout
                 </Button>
             </div>
             {/*<p className={cls.note}>Select number of the remaining low priority games</p>*/}

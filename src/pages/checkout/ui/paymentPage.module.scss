@@ -15,19 +15,31 @@
 .header{
   text-transform: uppercase;
   letter-spacing: 3px;
-  font-size: var(--font-size-xl);
-  line-height: var(--font-line-xl);
+  font-size: var(--font-size-l);
+  line-height: var(--font-line-l);
   color: black;
   text-align: center;
 }
 
+.banner{
+  width: 100%;
+  height: 300px;
+  background-image: url("public/assets/card_calibration.png");
+}
 .orderContainer{
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height:fit-content;
   width: 50%;
   padding: 20px 40px;
   margin: 0 auto;
   background-color: white;
-
+  overflow: scroll;
+  h3{
+    font-size: var(--font-size-m);
+    line-height: 0;
+  }
 }
 
 .checkoutContent{
@@ -46,10 +58,7 @@
   0 8px 8px rgba(0,0,0,0.12),
   0 16px 16px rgba(0,0,0,0.12);
 
-  h3{
-    font-size: var(--font-size-m);
-    line-height: 0;
-  }
+
 
   .proceedToPaymentBtn{
     padding: 10px 10px;
@@ -57,10 +66,29 @@
     letter-spacing: 2px;
     height: 50px;
   }
+}
+
+.indicator{
+  position: absolute;
+  z-index: 2;
+  top:20px;
+  left: -20px;
+}
+
+.orderSummaryContainer{
+  position: relative;
+  padding: 20px 20px;
+  background-color: white;
+  box-shadow:  0 1px 1px rgba(0,0,0,0.12),
+  0 2px 2px rgba(0,0,0,0.12),
+  0 4px 4px rgba(0,0,0,0.12),
+  0 8px 8px rgba(0,0,0,0.12),
+  0 16px 16px rgba(0,0,0,0.12);
+
   .indicator{
     position: absolute;
     z-index: 2;
-    top:20px;
+    top:10px;
     left: -20px;
   }
 }
@@ -68,6 +96,39 @@
 
 
 
+.orderSummary{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.orderSummaryHeader{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.orderHeader{
+  font-size: var(--font-size-m);
+  font-weight: 600;
+  color: black;
+}
+.editBtn{
+  text-decoration: underline;
+  color: #2CA8FF;
+  cursor: pointer;
+}
+
+.cartContent{
+  .cartItem{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+.totalContainer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 
 
@@ -81,37 +142,58 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+.paymentContainer{
+  position: relative;
+  padding: 20px 20px;
+  background-color: white;
+  box-shadow:  0 1px 1px rgba(0,0,0,0.12),
+  0 2px 2px rgba(0,0,0,0.12),
+  0 4px 4px rgba(0,0,0,0.12),
+  0 8px 8px rgba(0,0,0,0.12),
+  0 16px 16px rgba(0,0,0,0.12);
+}
+.paymentOptions{
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.paymentOption{
+  flex: 1;
+  width: auto;
+}
+.finalSum{
+  font-size: var(--font-size-m);
+  text-align: center;
+  font-weight: 400;
+  padding-bottom: 20px;
+  letter-spacing: 1.5px;
+}
 
 .stripeBtn{
-  width: 100%;
   height: 40px;
   border-radius: 25px;
   font-size: 24px;
-  font-family: cursive;
+  background-color: #3232D5;
+}
+.cryptoBtn{
+  height: 40px;
+  border-radius: 25px;
+  font-size: 24px;
+  background-color: #1652F0;
 }
 
 .buyBtn{
   width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
+
   background-color: #4a64f7;
   border-radius: 25px;
   letter-spacing: 1.2px;
 }
-
-
-
+.btnlabel{
+  font-size: var(--font-size-sm);
+  line-height: var(--font-line-sm);
+  padding-top: 3px;
+  text-align: center;
+}
 //order summary
 
