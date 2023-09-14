@@ -106,7 +106,6 @@ const PaymentPage: FC<PaymentPageProps> = ({ }) => {
                                 </div>
                             </div>
                         </div> }
-                        
                     </div>
                 </div>
             </div>

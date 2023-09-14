@@ -11,6 +11,7 @@ interface PaypalBtnProps{
 export const PaypalBtn:React.FC = () =>{
     const paypalBtnRef = React.useRef(null)
     const [paypalInstance,setPaypalInstance] = React.useState()
+
     React.useEffect(()=>{
         loadScript({clientId:"AY0dnmACG1u1jyrFGmSQU9R857JY4T2nI_bQ_VYEHR8fshsaRLFD8HRuK-hkRbBkfwrL8hCmcc7gIvTF"})
             .then((paypal)=>{
