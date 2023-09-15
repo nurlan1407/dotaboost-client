@@ -22,4 +22,7 @@ export const fetchDota2Services = createAsyncThunk<Array<Service>,any,{rejectVal
             return thunkApi.rejectWithValue({msg:"Failed to fetch, try later"});
         }
     }
-)
+);
+
+
+

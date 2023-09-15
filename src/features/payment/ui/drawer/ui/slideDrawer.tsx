@@ -6,7 +6,7 @@ import {PaypalBtn} from "features/payment/paypal/ui/paypalBtn";
 import {Link} from "react-router-dom";
 import {CartItem} from "pages/checkout/ui/cartItem";
 import {Order} from "entities/order/model/types";
-import {MMRBoost} from "shared/config/dotaServices/dotaServices";
+// import {MMRBoost} from "shared/config/dotaServices/dotaServices";
 import {Rank as RankObject, ranks} from "shared/config/mmrBoostConfig/mmrBoostConfig";
 import MMRBoostImage from 'public/assets/card_mmrBoost.png'
 import {useAppSelector} from "app/providers/store/store";
@@ -24,17 +24,17 @@ export const SideDrawer: React.FC<SideDrawerInterface> = ({showDrawer, closeDraw
 
     const currentOrder = useAppSelector(state => state.orderReducer.basketOrder)
     const currentService = useAppSelector(state => state.orderReducer.currentService)
-    const orderedService: MMRBoost = {
-        fromMMR: 1,
-        toMMR: 2000,
-        toMMRRankImage: ranks[0].img,
-        fromMMRRankImage: ranks[1].img,
-        type: "Boost"
-    }
-    const order: Order = {
-        service: orderedService,
-        status: "UnPayed"
-    }
+    // const orderedService: MMRBoost = {
+    //     fromMMR: 1,
+    //     toMMR: 2000,
+    //     toMMRRankImage: ranks[0].img,
+    //     fromMMRRankImage: ranks[1].img,
+    //     type: "Boost"
+    // }
+    // const order: Order = {
+    //     service: orderedService,
+    //     status: "UnPayed"
+    // }
     return (
         <div className={`${cls.sideDrawer} ${showDrawer ? cls.open : ""}`}>
             <div className={cls.sideDrawerHeader}>

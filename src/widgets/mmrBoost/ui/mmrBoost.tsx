@@ -8,7 +8,7 @@ import {useDispatch} from "react-redux";
 import { toggleDrawer} from "app/providers/store/reducers/htmlStates";
 import {addOrder, setCurrentService} from "entities/order/model/slice";
 import {Order} from "entities/order/model/types";
-import {DotaServices, MMRBoost} from "shared/config/dotaServices/dotaServices";
+import {DotaServices} from "shared/config/dotaServices/dotaServices";
 
 const MAX_MMR = 8000
 const DIVISION = 1000 //как делится в полоске
@@ -135,19 +135,19 @@ export const MmrBoost: FC = ({ }) => {
                 </h3>
                     <Button className={cls.buyBtn} onClick={()=>{
                         //create and order
-                        const mmrBoost:MMRBoost={
-                            fromMMR:currentMMR ,
-                            toMMR:desiredMMR,
-                            fromMMRRankImage:currentRankImage.img,
-                            toMMRRankImage:desiredRankImage.img,
-                            type:"Boost"
-                        }
-                        const newOrder:Order ={
-                            status:"UnPayed",
-                            service: mmrBoost
-                        }
+                        // const mmrBoost:MMRBoost={
+                        //     fromMMR:currentMMR ,
+                        //     toMMR:desiredMMR,
+                        //     fromMMRRankImage:currentRankImage.img,
+                        //     toMMRRankImage:desiredRankImage.img,
+                        //     type:"Boost",
+                        // }
+                        // const newOrder:Order ={
+                        //     status:"UnPayed",
+                        //     service: mmrBoost
+                        // }
                         dispatch(toggleDrawer(true))
-                        dispatch(addOrder(newOrder))
+                        // dispatch(addOrder(newOrder))
                     }}>Checkout</Button>
             </div>
         </div>

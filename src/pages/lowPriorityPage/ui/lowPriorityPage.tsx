@@ -1,5 +1,4 @@
 import React from 'react'
-import {MmrBoost} from "widgets/mmrBoost"
 import {LowPriority} from "widgets/lowPriority"
 import cls from './lowPriority.module.scss'
 interface LowPriorityPageProps{

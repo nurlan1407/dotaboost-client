@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import cls from './lowPriority.module.scss'
 import Button from 'shared/ui/button/Button'
 import {InputRange} from "widgets/inputRange/ui/inputRange";
-import {DotaServices, LowPriority as LowPriorityType, MMRBoost} from "shared/config/dotaServices/dotaServices";
+import {DotaServices} from "shared/config/dotaServices/dotaServices";
 import {Order} from "entities/order/model/types";
 import {toggleDrawer} from "app/providers/store/reducers/htmlStates";
 import {addOrder, setCurrentService} from "entities/order/model/slice";
@@ -59,16 +59,17 @@ export const LowPriority: FC = ({ }) => {
                     ${estimatedPrice}
                 </div>
                 <Button className={cls.buyBtn} onClick={() => {
-                    const lowPriority:LowPriorityType={
-                        amount:amoutOfGames,
-                        type:"countable"
-                    }
-                    const newOrder:Order ={
-                        status:"UnPayed",
-                        service: lowPriority
-                    }
+                    // const lowPriority:LowPriorityType={
+                    //     amount:amoutOfGames,
+                    //     type:"countable"
+                    // }
+                    // const newOrder:Order ={
+                    //     status:"UnPayed",
+                    //     service: lowPriority,
+                        
+                    // }
                     dispatch(toggleDrawer(true))
-                    dispatch(addOrder(newOrder))
+                    // dispatch(addOrder(newOrder))
                 }}>
                     Checkout
                 </Button>
