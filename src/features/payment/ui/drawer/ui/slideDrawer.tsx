@@ -24,17 +24,6 @@ export const SideDrawer: React.FC<SideDrawerInterface> = ({showDrawer, closeDraw
 
     const currentOrder = useAppSelector(state => state.orderReducer.basketOrder)
     const currentService = useAppSelector(state => state.orderReducer.currentService)
-    // const orderedService: MMRBoost = {
-    //     fromMMR: 1,
-    //     toMMR: 2000,
-    //     toMMRRankImage: ranks[0].img,
-    //     fromMMRRankImage: ranks[1].img,
-    //     type: "Boost"
-    // }
-    // const order: Order = {
-    //     service: orderedService,
-    //     status: "UnPayed"
-    // }
     return (
         <div className={`${cls.sideDrawer} ${showDrawer ? cls.open : ""}`}>
             <div className={cls.sideDrawerHeader}>

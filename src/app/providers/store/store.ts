@@ -3,6 +3,7 @@ import htmlReducer from "./reducers/htmlStates";
 import userReducer from "entities/user/model/slice";
 import orderReducer from "entities/order/model/slice";
 import servicesReducer from "entities/services/model/slice";
+import productReducer from "entities/products/model/slice";
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 
 export const store = configureStore({
@@ -10,7 +11,8 @@ export const store = configureStore({
     htmlStatesReducer: htmlReducer,
     userReducer: userReducer,
     orderReducer: orderReducer,
-    servicesReducer: servicesReducer
+    servicesReducer: servicesReducer,
+    productReducer:productReducer
   }
 })
 

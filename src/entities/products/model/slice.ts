@@ -10,18 +10,22 @@ type ProductSliceState = {
     status: LoadingStatus,
     error: null | string,
     list: Array<Product>,
+    selectedProduct: Product|null,
 }
 const initialState: ProductSliceState = {
     status: "inactive",
     list: [],
-    error: null
+    error: null,
+    selectedProduct:null
 }
 
 const ProductsSlice = createSlice({
     name: "productSlice",
     initialState,
     reducers: {
-
+        selectProduct:(state,payload:PayloadAction<Product>)=>{
+            state.selectedProduct = payload.payload;
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(getProducts.pending, (state) => {
@@ -39,4 +43,5 @@ const ProductsSlice = createSlice({
     }
 });
 
+export const {selectProduct} = ProductsSlice.actions;
 export default ProductsSlice.reducer;

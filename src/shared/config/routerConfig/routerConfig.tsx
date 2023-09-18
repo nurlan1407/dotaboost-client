@@ -4,6 +4,8 @@ import {PaymentPageAsync} from "pages/checkout/ui/paymentPage.Async";
 import {MmrBoostAsync} from "pages/mmrBoostPage/ui/mmrBoostPage.Async";
 import {LowPriority} from "widgets/lowPriority";
 import {LowPriorityAsync} from "pages/lowPriorityPage";
+import CalibrationPage from "pages/calibration/ui/calibrationPage";
+import { CalibrationPageAsync } from "pages/calibration/ui/calibrationPage.Async";
 
 export enum AppRoutes{
     MAIN="main",
@@ -38,7 +40,7 @@ export const RouterConfig:Record<AppRoutes, RouteProps> = {
     },
     [AppRoutes.CALIBRATION]:{
         path:RoutePath.calibration,
-        element:<></>
+        element:<CalibrationPageAsync/>
     },
     [AppRoutes.BEHAVIOUR]:{
         path:RoutePath.behaviour,

@@ -7,7 +7,7 @@ import {ServiceInstance} from "widgets/card/types";
 interface OrderSliceState {
     orderHistory: Array<Order>,
     basketOrder: Order | null,
-    currentService: ServiceInstance | null
+    currentService: ServiceInstance | null,
 };
 
 const initialState: OrderSliceState = {

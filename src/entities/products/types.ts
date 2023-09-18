@@ -3,5 +3,11 @@ export interface Product{
     serviceId:number,
     name:string,
     price:number,
-    imgUrl:number   
+    imgUrl:string,
+    amount:number,
+}
+
+export interface MMRBoostProduct extends Product{
+    fromMMR:number,
+    toMMR:number
 }

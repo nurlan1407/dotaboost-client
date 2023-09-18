@@ -21,7 +21,7 @@ export const CartItem: React.FC<CartItemProps> = ({item, onDeleteClicked, order}
                         onDeleteClicked()
                     }}></DeleteButton>
                 </div>
-                {order.service.type === "Boost" && <div className={cls.serviceContainer}>
+                {order.type === "Boost" && <div className={cls.serviceContainer}>
                     <label className={cls.checkBoxContainer}>
                         <input className={cls.options} type="checkbox"/>&nbsp;&nbsp;TWITCH.TV +4$
                     </label>

@@ -29,8 +29,8 @@ export interface Order{
     orderNumber?:number 
     title:string,
     createdAt:number,
-    payment:Payment,
-    items:Product[],
+    payment?:Payment,
+    product:Product,
     type:ServiceType
 }
 
