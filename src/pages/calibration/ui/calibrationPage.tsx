@@ -9,8 +9,9 @@ import { addOrder, setCurrentService } from 'entities/order/model/slice';
 import { DotaServices } from 'shared/config/dotaServices/dotaServices';
 import Button from 'shared/ui/button/Button';
 import { toggleDrawer } from 'app/providers/store/reducers/htmlStates';
-import { selectProduct } from 'entities/products/model/slice';
+import { selectProduct, setProductAmount } from 'entities/products/model/slice';
 import { Order } from 'entities/order/model/types';
+import { Product } from 'entities/products/types';
 interface CalibrationPageProps {
 
 };
@@ -24,20 +25,29 @@ const HOURS_TO_FIRST_GAME = 2
 
 
 const CalibrationPage: React.FC<CalibrationPageProps> = ({ }) => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); 
+    const {list, selectedProduct} = useAppSelector((state)=>state.productReducer)
+    const [product,setProduct ]= React.useState<Product|null>(null)
     const [amoutOfGames, setAmountOfGames] = React.useState(MIN_GAMES)
     const [estimatedTime, setEstimatedTime] = React.useState(amoutOfGames === MIN_GAMES ? 2 : amoutOfGames * HOURS_PER_GAME)
-    const [estimatedPrice, setEstimatedPrice] = React.useState(amoutOfGames * PRICE_PER_GAME)
+    // const [estimatedPrice, setEstimatedPrice] = React.useState(amoutOfGames * PRICE_PER_GAME)
 
 
     React.useEffect(() => {
         dispatch(setCurrentService(DotaServices["Calibration"]))
-        //@ts-ignore
-        dispatch(getProducts(3))
+        if(list.length===0){
+        //  @ts-ignore
+        dispatch(getProducts(3))    
+        }
+       
     }, [])
 
-    const {list, selectedProduct} = useAppSelector((state)=>state.productReducer)
+    const onSelectProduct = (product:Product,amount:number) =>{
+        dispatch(selectProduct(product))
+    }
 
+    // console.log('rerender');
+    
     return (
         <div className='page'>
             <div className='wrapper'>
@@ -47,7 +57,7 @@ const CalibrationPage: React.FC<CalibrationPageProps> = ({ }) => {
                         <div className={cls.recomendation}>Select your previous medal</div>
                         <div className={cls.productsContainer}>
                             {list.map((item) => (
-                                <div key={item.productId} className={`${cls.card} ${selectedProduct === item ? cls.active : "" }`} onClick={()=>{dispatch(selectProduct(item))}}>
+                                <div key={item.productId} className={`${cls.card} ${selectedProduct === item ? cls.active : "" }`} onClick={()=>{onSelectProduct(item,amoutOfGames)}}>
                                     <img src={item.imgUrl} className={cls.cardImg}></img>
                                     <div className={cls.cardTitle}>{item.name}</div>
                                 </div>
@@ -63,8 +73,8 @@ const CalibrationPage: React.FC<CalibrationPageProps> = ({ }) => {
                                     min={MIN_GAMES}
                                     max={MAX_GAMES}
                                     step={1}
-                                    value={amoutOfGames}
-                                    onValueChange={(num) => setAmountOfGames(num)}
+                                    value={ amoutOfGames}
+                                    onValueChange={(num) => {setAmountOfGames(num)}}
                                 />
                             </div>
                             <div className={cls.gameAmount}>{amoutOfGames}</div>
@@ -75,28 +85,20 @@ const CalibrationPage: React.FC<CalibrationPageProps> = ({ }) => {
                             Estimated time for completion:&nbsp;&nbsp; <strong style={{ color: "#2CA8FF" }}>  {estimatedTime} hours</strong>
                         </div>
                         <div className={cls.estimatedPrice}>
-                            ${estimatedPrice}
+                            ${selectedProduct?(selectedProduct?.price * amoutOfGames):"--"}
                         </div>
                         <Button className={cls.buyBtn} onClick={() => {
                             const newOrder:Order =  {
+                                _id:null,
                                 orderNumber:null, 
                                 title: "Calibratioon",
                                 createdAt:Date.now(),
-                                product:selectedProduct ,
+                                product:{...selectedProduct,amount:amoutOfGames},
                                 type:"countable",
-                            
+                                status:"UnPayed",
                             }
                             dispatch(addOrder(newOrder))
-                            // const lowPriority:LowPriorityType={
-                            //     amount:amoutOfGames,
-                            //     type:"countable"
-                            // }
-                            // const newOrder:Order ={
-                            //     status:"UnPayed",
-                            //     service: lowPriority,
-                            // }
                             dispatch(toggleDrawer(true))
-                            // dispatch(addOrder(newOrder))
                         }}>
                             Checkout
                         </Button>

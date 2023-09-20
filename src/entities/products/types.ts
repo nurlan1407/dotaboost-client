@@ -4,7 +4,7 @@ export interface Product{
     name:string,
     price:number,
     imgUrl:string,
-    amount:number,
+    amount:number|null,
 }
 
 export interface MMRBoostProduct extends Product{

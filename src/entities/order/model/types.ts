@@ -1,4 +1,5 @@
 import { Product } from "entities/products/types";
+import { AccountCredentials } from "../api/orderApi";
 
 export type OrderStatus = "Finished" | "InProcess" | "UnPayed";
 export type ServiceType = "Boost"|"countable" //"Boost" has 2 values from and to, countable is type of boost where amount of games is required, each of them will have different renders
@@ -26,11 +27,14 @@ export interface Service{
 }
 
 export interface Order{
+    _id:string|null //"sda",
     orderNumber?:number 
     title:string,
     createdAt:number,
-    payment?:Payment,
+    payment?:Payment|null,
     product:Product,
-    type:ServiceType
+    type:ServiceType,
+    status:OrderStatus,
+    accountCredentials?:AccountCredentials|null
 }
 

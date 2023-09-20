@@ -7,26 +7,47 @@ import { InputComponent } from "shared/ui/input/input";
 import { StepIndicator } from "shared/stepIndicator/ui/stepIndicator";
 import ProfileIcon from "public/assets/icon_profile.svg";
 import img from 'public/assets/card_lowPriority.png';
+import { useAppSelector } from 'app/providers/store/store';
+import { useDispatch } from 'react-redux';
+import { AccountCredentials, CreatePaypalOrder, getOrder } from 'entities/order/api/orderApi';
+import ReactRouterDom, { useParams } from 'react-router-dom';
 interface PaymentPageProps {
 
 }
 
 const PaymentPage: FC<PaymentPageProps> = ({ }) => {
+    const dispatch = useDispatch()
+    const {orderId} = useParams();
+    const orderState = useAppSelector(state => state.orderReducer)
+    
+    React.useEffect(()=>{
+        if(orderState.order==null){
+            //@ts-ignore
+           dispatch(getOrder(orderId))
+       }
+    },[])
+
+   console.log(orderState.order);
+   
+    // React.useEffect(()=>{
+       
+      
+    // },[orderState.status])
+ 
     const [email, setEmail] = React.useState("")
     const [steamId, setSteamId] = React.useState("")
     const [password, setPassword] = React.useState("")
 
     type PaymentStage = "cred" | "pay"
     const [stage, setStage] = React.useState<PaymentStage>("cred")
-
     return (
         <div className={cls.paymentPage}>
-            <div className={'wrapper'}>
+            {orderState.status ==="fulfilled" &&<div className={'wrapper'}>
                 <div className={cls.orderContainer}>
                     {/*<img src={img} className={cls.banner}/>*/}
-                    {/* <div className={cls.header}>
-                        <h2>Order #1337</h2>
-                    </div> */}
+                    <div className={cls.header}>
+                        <h2>{orderState.order.orderNumber}</h2>
+                    </div>
                     <div className={cls.orderSummaryContainer}>
                         <StepIndicator step={1} className={cls.indicator} />
                         <div className={cls.orderSummary}>
@@ -36,9 +57,9 @@ const PaymentPage: FC<PaymentPageProps> = ({ }) => {
                             </div>
                             <div className={cls.cartContent}>
                                 <div className={cls.cartItem}>
-                                    <p>MMR boost</p>
-                                    <p>x1</p>
-                                    <p>$0.72</p>
+                                    <p>{orderState.order.product.name}</p>
+                                    <p>x{orderState.order.product.amount}</p>
+                                    <p>{orderState.order.product.amount * orderState.order.product.price} USD</p>
                                 </div>
                             </div>
                             <div className={cls.totalContainer}>
@@ -51,7 +72,7 @@ const PaymentPage: FC<PaymentPageProps> = ({ }) => {
                         <div className={cls.gameAccountCredentials}>
                             <StepIndicator step={2} className={cls.indicator} />
                             <h3>Details</h3>
-                            {stage === "cred" ? (
+                            {Object.keys(orderState.order.accountCredentials).length === 0 ? (
                                 <>
                                     <InputComponent value={email} onChange={(e) => {
                                         setEmail(e.target.value)
@@ -63,17 +84,24 @@ const PaymentPage: FC<PaymentPageProps> = ({ }) => {
                                         setPassword(e.target.value)
                                     }} type={"password"} label={"Password"} />
                                     <Button className={cls.proceedToPaymentBtn} onClick={() => {
-                                        setStage("pay")
+                                        const reqbody:AccountCredentials={
+                                            orderId:orderId,
+                                            email:email,
+                                            password:password,
+                                            steamId:steamId
+                                        }
+                                        //@ts-ignore
+                                        dispatch(CreatePaypalOrder(reqbody))
                                     }}>Proceed to payment</Button>
                                 </>) :
                                 <div className={cls.readyInputContainer}>
                                     <div className={cls.userCredContainer}>
                                         <ProfileIcon className={cls.icon} />
-                                        <div>{email}</div>
+                                        <div>{orderState.order.accountCredentials.email}</div>
                                     </div>
                                     <div className={cls.userCredContainer}>
                                         <ProfileIcon className={cls.icon} />
-                                        <div>{steamId}</div>
+                                        <div>{orderState.order.accountCredentials.steamId}</div>
                                     </div>
                                 </div>
                             }
@@ -82,7 +110,7 @@ const PaymentPage: FC<PaymentPageProps> = ({ }) => {
                     <div className={cls.paymentContainer}>
                         <StepIndicator step={3} className={cls.indicator} />
                         <h3>Payment</h3>
-                        {stage ==="pay" &&<div className={cls.active}>
+                        {orderState.order.payment &&<div className={cls.active}>
                             <div className={cls.finalSum}>Payment due 228$</div>
                             <hr />
                             <div className={cls.paymentOptions}>
@@ -108,7 +136,8 @@ const PaymentPage: FC<PaymentPageProps> = ({ }) => {
                         </div> }
                     </div>
                 </div>
-            </div>
+            </div>}
+            
         </div>
     )
 }

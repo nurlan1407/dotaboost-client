@@ -42,7 +42,7 @@ export const Calibraion: FC<CalibraionProps> = ({ productsList }) => {
                 </div>
                 <div className={cls.productsContainer}>
                     {productsList.map((item)=>(
-                        <div className={cls.card}>
+                        <div className={cls.card} key={item.productId}>
                             <img src={item.imgUrl} className={cls.cardImg}></img>
                             <div className={cls.cardTitle}>{item.name}</div>
                         </div>

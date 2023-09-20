@@ -6,7 +6,7 @@ interface InputRangeProps{
     onValueChange: (value:number)=>void,
     min:number,
     max:number,
-    step:number
+    step:number,
 }
 
 export const InputRange:React.FC<InputRangeProps> =({value,onValueChange, min, max,step})=>{

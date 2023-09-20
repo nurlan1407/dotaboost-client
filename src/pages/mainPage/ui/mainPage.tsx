@@ -28,7 +28,7 @@ const MainPage: FC = ({}) => {
                 <div className={cls.servicesContainer}>
                     <h3 className={cls.servicesHeader}>Select a service</h3>
                     <div className={cls.servicesList}>
-                        {state.map((item) => <Card img={item.imgLink} title={item.title} link={item.link}></Card>)}
+                        {state.map((item) => <Card  key={item.id} img={item.imgLink} title={item.title} link={item.link}></Card>)}
                     </div>
                 </div>
             </div>

@@ -18,7 +18,7 @@ export enum AppRoutes{
 
 export const RoutePath:Record<AppRoutes, string> = {
     [AppRoutes.MAIN]: '/',
-    [AppRoutes.PAYMENT]:"/payment",
+    [AppRoutes.PAYMENT]:"/payment/:orderId",
     [AppRoutes.MMR_BOOST]: '/mmr',
     [AppRoutes.LOW_PRIORITY]: '/lowpriority',
     [AppRoutes.CALIBRATION]: "/calibration",

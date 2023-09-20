@@ -13,6 +13,8 @@ export const getProducts = createAsyncThunk<Product[], number, {rejectValue:erro
             if(response.ok === false){
                 return thunkApi.rejectWithValue({msg:"failed to fetch"});
             }
+            // console.log("api call");
+            
             
             return data;
         }catch(e){

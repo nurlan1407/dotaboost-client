@@ -25,6 +25,9 @@ const ProductsSlice = createSlice({
     reducers: {
         selectProduct:(state,payload:PayloadAction<Product>)=>{
             state.selectedProduct = payload.payload;
+        },
+        setProductAmount:(state, payload:PayloadAction<number>)=>{
+            if(state.selectedProduct!=null)state.selectedProduct.amount = payload.payload
         }
     },
     extraReducers: (builder) => {
@@ -33,6 +36,7 @@ const ProductsSlice = createSlice({
                 state.error = null
         }),
          builder.addCase(getProducts.fulfilled, (state, { payload }) => {
+            console.log("api call");
             state.list = payload;
             state.status = "inactive";
         });
@@ -43,5 +47,5 @@ const ProductsSlice = createSlice({
     }
 });
 
-export const {selectProduct} = ProductsSlice.actions;
+export const {selectProduct,setProductAmount} = ProductsSlice.actions;
 export default ProductsSlice.reducer;
