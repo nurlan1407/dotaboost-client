@@ -4,11 +4,13 @@ import { createOrder } from "entities/order/api/orderApi"
 // import Button from "shared/ui/button/Button" 
 
 interface PaypalBtnProps{
+  orderId:string,
+  onPaypalApprove:()=>void
 }
 
 
 
-export const PaypalBtn:React.FC<PaypalBtnProps> = ({}) =>{
+export const PaypalBtn:React.FC<PaypalBtnProps> = ({orderId,onPaypalApprove}) =>{
     const paypalBtnRef = React.useRef(null)
     const [paypalInstance,setPaypalInstance] = React.useState()
     
@@ -16,23 +18,28 @@ export const PaypalBtn:React.FC<PaypalBtnProps> = ({}) =>{
         window.paypal
         .Buttons({
           async createOrder(){
-            try{
-                
-                return ""
-            }catch(e){
-                return e
-            }
+            return orderId;
+          },
+          style:{
+            layout:"horizontal",
+            label:"paypal",
+            height:39,
+            color:"blue",
+            shape:"pill",
+            tagline:false,
           },
           onApprove: async (data, actions) => {
             const order = await actions.order.capture();
+            onPaypalApprove();
             console.log(order);
           },
           onError: (err) => {
+            alert(err)
             console.log(err);
           },
         })
         .render(paypalBtnRef.current);
-    
+  
     },[])
 
 

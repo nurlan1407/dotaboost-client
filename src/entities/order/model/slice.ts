@@ -3,7 +3,7 @@ import {Order} from "entities/order/model/types"
 import { LoadingStatus } from "entities/types";
 // import {Service} from "shared/config/dotaServices/dotaServices";
 import {ServiceInstance} from "widgets/card/types";
-import { createOrder, CreatePaypalOrder, getOrder } from "../api/orderApi";
+import { ConfirmPaypalOrder, createOrder, CreatePaypalOrder, getOrder } from "../api/orderApi";
 
 
 
@@ -56,13 +56,8 @@ const OrdersSlice = createSlice({
             state.status = 'loading'
         }),
         builder.addCase(getOrder.fulfilled, (state, {payload})=>{
-
-            
             state.status = "fulfilled"
             state.order = payload
-            
-
-            
         }),
         builder.addCase(getOrder.rejected, (state,{payload})=>{
             state.status = "rejected"
@@ -84,7 +79,25 @@ const OrdersSlice = createSlice({
             state.status = "rejected"
             state.order = null
             state.error = payload.msg
-        })   
+        })
+
+
+
+
+
+        builder.addCase(ConfirmPaypalOrder.pending, (state)=>{
+            state.status = 'loading'
+        }),
+        builder.addCase(ConfirmPaypalOrder.fulfilled, (state, {payload})=>{
+            state.status = "fulfilled"
+            if(payload) state.order.payment.status = "Payed"
+        }),
+        builder.addCase(ConfirmPaypalOrder.rejected, (state,{payload})=>{
+            state.status = "rejected"
+            state.order = null
+            state.error = payload.msg
+        })  
+
     }
 });
 

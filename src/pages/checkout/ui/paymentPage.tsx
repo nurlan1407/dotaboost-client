@@ -9,30 +9,29 @@ import ProfileIcon from "public/assets/icon_profile.svg";
 import img from 'public/assets/card_lowPriority.png';
 import { useAppSelector } from 'app/providers/store/store';
 import { useDispatch } from 'react-redux';
-import { AccountCredentials, CreatePaypalOrder, getOrder } from 'entities/order/api/orderApi';
-import ReactRouterDom, { useParams } from 'react-router-dom';
+import { AccountCredentials, ConfirmPaypalOrder, CreatePaypalOrder, getOrder } from 'entities/order/api/orderApi';
+import ReactRouterDom, { useNavigate, useParams } from 'react-router-dom';
 interface PaymentPageProps {
 
 }
 
 const PaymentPage: FC<PaymentPageProps> = ({ }) => {
+    const navigage = useNavigate();
     const dispatch = useDispatch()
     const {orderId} = useParams();
     const orderState = useAppSelector(state => state.orderReducer)
-    
     React.useEffect(()=>{
         if(orderState.order==null){
             //@ts-ignore
            dispatch(getOrder(orderId))
        }
     },[])
-
-   console.log(orderState.order);
-   
-    // React.useEffect(()=>{
-       
-      
-    // },[orderState.status])
+    const onPaymentApprove = () =>{
+        //@ts-ignore
+        dispatch(ConfirmPaypalOrder(orderId))
+        navigage("/home")
+        
+    }
  
     const [email, setEmail] = React.useState("")
     const [steamId, setSteamId] = React.useState("")
@@ -46,7 +45,8 @@ const PaymentPage: FC<PaymentPageProps> = ({ }) => {
                 <div className={cls.orderContainer}>
                     {/*<img src={img} className={cls.banner}/>*/}
                     <div className={cls.header}>
-                        <h2>{orderState.order.orderNumber}</h2>
+                        <h2>Order #{orderState.order.orderNumber}</h2>
+                        <hr></hr>
                     </div>
                     <div className={cls.orderSummaryContainer}>
                         <StepIndicator step={1} className={cls.indicator} />
@@ -110,7 +110,7 @@ const PaymentPage: FC<PaymentPageProps> = ({ }) => {
                     <div className={cls.paymentContainer}>
                         <StepIndicator step={3} className={cls.indicator} />
                         <h3>Payment</h3>
-                        {orderState.order.payment &&<div className={cls.active}>
+                        {orderState.order.payment.transactionId &&<div className={cls.active}>
                             <div className={cls.finalSum}>Payment due 228$</div>
                             <hr />
                             <div className={cls.paymentOptions}>
@@ -122,7 +122,10 @@ const PaymentPage: FC<PaymentPageProps> = ({ }) => {
                                 </div>
                                 <div className={cls.paymentOption}>
                                     <div>
-                                        <PaypalBtn />
+                                        <PaypalBtn 
+                                            orderId={orderState.order.payment.transactionId as string} 
+                                            onPaypalApprove={onPaymentApprove}  
+                                        />
                                     </div>
                                     <div className={cls.btnlabel}>PayPal or card payment</div>
                                 </div>

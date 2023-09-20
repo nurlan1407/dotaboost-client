@@ -25,6 +25,7 @@ export const createOrder = createAsyncThunk<Order,Order,{rejectValue:errorRespon
             
                  console.log("create order api call");
             const data = await response.json()
+            console.log(data);
             
             if(response.status===404){
                 return thunkApi.rejectWithValue({msg:data.msg})
@@ -87,3 +88,25 @@ export const CreatePaypalOrder = createAsyncThunk<Order,AccountCredentials,{reje
         }
     }
 )
+
+
+export const ConfirmPaypalOrder = createAsyncThunk<boolean, string,{rejectValue:errorResponse}>(
+    "order/payment/confirm",
+    async(orderId:string, thunkApi) => {
+        try{
+            const response = await fetch(`http://localhost:8080/order/payment/capture/${orderId}`,{
+                method:"POST",
+            });
+            const data = await response.json();
+            // console.log(data);
+            console.log("confirm payment api call");
+            if(response.ok === false){
+                return thunkApi.rejectWithValue({msg:"Failed to capture paypal payment"})
+            } 
+            return data
+        }catch(e){
+            return thunkApi.rejectWithValue({msg:e})
+        }
+    }
+    
+    )
