@@ -9,8 +9,10 @@ import ProfileIcon from "public/assets/icon_profile.svg";
 import img from 'public/assets/card_lowPriority.png';
 import { useAppSelector } from 'app/providers/store/store';
 import { useDispatch } from 'react-redux';
-import { AccountCredentials, ConfirmPaypalOrder, CreatePaypalOrder, getOrder } from 'entities/order/api/orderApi';
+import { AccountCredentials, AddOrderUserCredentials, ConfirmPaypalOrder, CreatePaypalOrder, CreateStripeOrder, getOrder } from 'entities/order/api/orderApi';
 import ReactRouterDom, { useNavigate, useParams } from 'react-router-dom';
+import { LoadingSpinner } from 'widgets/loading';
+import Spinner from 'shared/ui/spinner/spinner';
 interface PaymentPageProps {
 
 }
@@ -19,32 +21,32 @@ const PaymentPage: FC<PaymentPageProps> = ({ }) => {
     const navigage = useNavigate();
     const dispatch = useDispatch()
     const {orderId} = useParams();
-    const orderState = useAppSelector(state => state.orderReducer)
-    React.useEffect(()=>{
-        if(orderState.order==null){
-            //@ts-ignore
-           dispatch(getOrder(orderId))
-       }
-    },[])
+    //@ts-ignore
     const onPaymentApprove = () =>{
         //@ts-ignore
         dispatch(ConfirmPaypalOrder(orderId))
         navigage("/home")
-        
     }
- 
+    React.useEffect(()=>{
+        //@ts-ignore
+        dispatch(getOrder(orderId));
+    },[dispatch])
+    const orderState = useAppSelector(state => state.orderReducer)
     const [email, setEmail] = React.useState("")
     const [steamId, setSteamId] = React.useState("")
     const [password, setPassword] = React.useState("")
 
-    type PaymentStage = "cred" | "pay"
-    const [stage, setStage] = React.useState<PaymentStage>("cred")
     return (
+    
         <div className={cls.paymentPage}>
-            {orderState.status ==="fulfilled" &&<div className={'wrapper'}>
+             <div className={'wrapper'}>
                 <div className={cls.orderContainer}>
-                    {/*<img src={img} className={cls.banner}/>*/}
-                    <div className={cls.header}>
+                {orderState.order === null ? 
+                <div>
+                    <Spinner/>
+                </div> :
+                <>
+                <div className={cls.header}>
                         <h2>Order #{orderState.order.orderNumber}</h2>
                         <hr></hr>
                     </div>
@@ -83,6 +85,7 @@ const PaymentPage: FC<PaymentPageProps> = ({ }) => {
                                     <InputComponent value={password} onChange={(e) => {
                                         setPassword(e.target.value)
                                     }} type={"password"} label={"Password"} />
+                                    {orderState.error && <div style={{color:"red"}}>{orderState.error}</div>}
                                     <Button className={cls.proceedToPaymentBtn} onClick={() => {
                                         const reqbody:AccountCredentials={
                                             orderId:orderId,
@@ -91,8 +94,8 @@ const PaymentPage: FC<PaymentPageProps> = ({ }) => {
                                             steamId:steamId
                                         }
                                         //@ts-ignore
-                                        dispatch(CreatePaypalOrder(reqbody))
-                                    }}>Proceed to payment</Button>
+                                        dispatch(AddOrderUserCredentials(reqbody))
+                                    }}>{orderState.status === "loading" ? <Spinner></Spinner> : "Proceed to payment"}</Button>
                                 </>) :
                                 <div className={cls.readyInputContainer}>
                                     <div className={cls.userCredContainer}>
@@ -110,20 +113,26 @@ const PaymentPage: FC<PaymentPageProps> = ({ }) => {
                     <div className={cls.paymentContainer}>
                         <StepIndicator step={3} className={cls.indicator} />
                         <h3>Payment</h3>
-                        {orderState.order.payment.transactionId &&<div className={cls.active}>
+                        {orderState.order.accountCredentials.email && <div className={cls.active}>
                             <div className={cls.finalSum}>Payment due 228$</div>
                             <hr />
                             <div className={cls.paymentOptions}>
                                 <div className={cls.paymentOption}>
-                                    <Button className={` ${cls.buyBtn} ${cls.stripeBtn}`} onClick={() => { }}>Stripe</Button>
-                                    <div className={cls.btnlabel}>Card payment, giropay,
-                                        iDEAL, Bancontact and more
-                                    </div>
+                                    <Button className={` ${cls.buyBtn} ${cls.stripeBtn}`} onClick={() => { 
+                                        const reqbody:AccountCredentials={
+                                            orderId:orderId,
+                                            email:email,
+                                            password:password,
+                                            steamId:steamId
+                                        }
+                                        //@ts-ignore
+                                        dispatch(CreateStripeOrder(reqbody))
+                                    }}>Stripe</Button>
                                 </div>
                                 <div className={cls.paymentOption}>
                                     <div>
                                         <PaypalBtn 
-                                            orderId={orderState.order.payment.transactionId as string} 
+                                            orderId={orderId} 
                                             onPaypalApprove={onPaymentApprove}  
                                         />
                                     </div>
@@ -131,16 +140,15 @@ const PaymentPage: FC<PaymentPageProps> = ({ }) => {
                                 </div>
                                 <div className={cls.paymentOption}>
                                     <Button className={` ${cls.buyBtn} ${cls.cryptoBtn}`} onClick={() => { }}>coinbase</Button>
-                                    <div className={cls.btnlabel}>
-                                        Cryptocurrency
-                                    </div>
                                 </div>
                             </div>
                         </div> }
                     </div>
+                
+                </>}
+                    
                 </div>
-            </div>}
-            
+            </div>
         </div>
     )
 }

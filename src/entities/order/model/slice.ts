@@ -3,7 +3,7 @@ import {Order} from "entities/order/model/types"
 import { LoadingStatus } from "entities/types";
 // import {Service} from "shared/config/dotaServices/dotaServices";
 import {ServiceInstance} from "widgets/card/types";
-import { ConfirmPaypalOrder, createOrder, CreatePaypalOrder, getOrder } from "../api/orderApi";
+import { ConfirmPaypalOrder, createOrder, CreatePaypalOrder, CreateStripeOrder, getOrder } from "../api/orderApi";
 
 
 
@@ -46,7 +46,6 @@ const OrdersSlice = createSlice({
         }),
         builder.addCase(createOrder.rejected, (state,{payload})=>{
             state.status = "rejected"
-            state.order = null
             state.error = payload.msg
         }),
 
@@ -56,12 +55,13 @@ const OrdersSlice = createSlice({
             state.status = 'loading'
         }),
         builder.addCase(getOrder.fulfilled, (state, {payload})=>{
-            state.status = "fulfilled"
+            console.log("ASD");
             state.order = payload
+            addOrder(payload)
+            state.status = "fulfilled"
         }),
         builder.addCase(getOrder.rejected, (state,{payload})=>{
             state.status = "rejected"
-            state.order = null
             state.error = payload.msg
         })  
 
@@ -77,7 +77,6 @@ const OrdersSlice = createSlice({
         }),
         builder.addCase(CreatePaypalOrder.rejected, (state,{payload})=>{
             state.status = "rejected"
-            state.order = null
             state.error = payload.msg
         })
 
@@ -97,6 +96,23 @@ const OrdersSlice = createSlice({
             state.order = null
             state.error = payload.msg
         })  
+
+
+        builder.addCase(CreateStripeOrder.pending, (state)=>{
+            state.status = 'loading'
+        }),
+        builder.addCase(CreateStripeOrder.fulfilled, (state, {payload})=>{
+            console.log(payload);
+            
+            state.order = payload.order
+            state.status = "fulfilled"
+            window.open(payload.link,'_blank')
+        }),
+        builder.addCase(CreateStripeOrder.rejected, (state,{payload})=>{
+            state.status = "rejected"
+            state.error = payload.msg
+        })  
+
 
     }
 });

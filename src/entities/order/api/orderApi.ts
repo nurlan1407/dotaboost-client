@@ -45,6 +45,8 @@ export const createOrder = createAsyncThunk<Order,Order,{rejectValue:errorRespon
 export const getOrder = createAsyncThunk<Order,string,{rejectValue:errorResponse}>("order/getOrder",
     async(orderId:string, thunkApi)=>{
         try{
+            console.log(orderId);
+            
             const response = await fetch(`http://localhost:8080/order/get/${orderId}`,{
                 method:"GET",
             });
@@ -61,13 +63,72 @@ export const getOrder = createAsyncThunk<Order,string,{rejectValue:errorResponse
     }
 )
 
-export const CreatePaypalOrder = createAsyncThunk<Order,AccountCredentials,{rejectValue:errorResponse}>(
+
+export const AddOrderUserCredentials = createAsyncThunk<Order,AccountCredentials,{rejectValue:errorResponse}>(
     "order/payment/create",
     async(reqBody:AccountCredentials, thunkApi)=>{
+        try{    
+            const response = await fetch(`http://localhost:8080/order/addCredentials`,{
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Credentials":"true"
+                },
+                body:JSON.stringify(reqBody)
+            });
+            
+            const data = await response.json();
+            console.log(data);
+
+            // console.log(data);
+            console.log("create payment api call");
+            
+            if(response.ok === false){
+                return thunkApi.rejectWithValue({msg: data.msg})
+            } 
+            return data
+        }catch(e){
+            return thunkApi.rejectWithValue({msg:e})
+        }
+    }
+)
+
+
+export const CreatePaypalOrder = createAsyncThunk<Order,string,{rejectValue:errorResponse}>(
+    "order/payment/create",
+    async(orderId:string, thunkApi)=>{
         try{
             // console.log(reqBody);
+            const response = await fetch(`http://localhost:8080/order/payment/create/${orderId}`,{
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Credentials":"true"
+                },
+            });
             
-            const response = await fetch(`http://localhost:8080/order/payment/create`,{
+            const data = await response.json();
+            console.log(data);
+
+            // console.log(data);
+            console.log("create payment api call");
+            
+            if(response.ok === false){
+                return thunkApi.rejectWithValue({msg: data.msg})
+            } 
+            return data
+        }catch(e){
+            return thunkApi.rejectWithValue({msg:e})
+        }
+    }
+)
+
+
+export const CreateStripeOrder = createAsyncThunk<{order:Order, link:string}, AccountCredentials, {rejectValue:errorResponse}>(
+    "order/payment/stripe/create",
+    async(reqBody:AccountCredentials, thunkApi) => {
+        try{
+            const response = await fetch(`http://localhost:8080/order/payment/stripe/create`,{
                 method:"POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -78,17 +139,15 @@ export const CreatePaypalOrder = createAsyncThunk<Order,AccountCredentials,{reje
             const data = await response.json();
             // console.log(data);
             console.log("create payment api call");
-            
             if(response.ok === false){
-                return thunkApi.rejectWithValue({msg:"Failed to create order"})
-            } 
+                return thunkApi.rejectWithValue({msg: data.msg})
+            }
             return data
         }catch(e){
             return thunkApi.rejectWithValue({msg:e})
         }
     }
-)
-
+);
 
 export const ConfirmPaypalOrder = createAsyncThunk<boolean, string,{rejectValue:errorResponse}>(
     "order/payment/confirm",

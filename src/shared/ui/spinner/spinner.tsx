@@ -7,7 +7,7 @@ interface SpinnerProps{
 
 const Spinner: FC<SpinnerProps> = ({className}) => {
     return (
-        <div className={cls.ldsSpinner}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <div className={cls.ldsDualRing}></div>
     )
 }
 

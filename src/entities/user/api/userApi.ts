@@ -8,7 +8,7 @@ export const register = createAsyncThunk<RegisterResponse,RegisterFormParams,{}>
     "user/register",
     async function (reqBody:RegisterFormParams,{rejectWithValue}){
         try{
-            const response =await fetch("http://localhost:4000/user/register",{
+            const response =await fetch("http://localhost:8080/user/register",{
                 method:"POST",
                     headers: {
                     "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export const login = createAsyncThunk<RegisterResponse,LoginFormParams,{}>(
     "user/login",
     async function(reqBody:LoginFormParams,{rejectWithValue}){
         try{
-            const response =await fetch("http://localhost:4000/user/login",{
+            const response =await fetch("http://localhost:8080/user/login",{
                 method:"POST",
                 headers: {
                     "Content-Type": "application/json",
